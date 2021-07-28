@@ -115,7 +115,7 @@
 
 <div
 	use:filedrop
-	on:fileselect={(ev) => {
+	on:filedrop={(ev) => {
 		console.log(ev.detail.files);
 	}}
 	{id}

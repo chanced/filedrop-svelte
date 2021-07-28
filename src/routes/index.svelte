@@ -16,7 +16,7 @@
 <div bind:this={container} class="container">
 	<div
 		use:filedrop={{ disabled }}
-		on:fileselect={(e) => {
+		on:filedrop={(e) => {
 			files = e.detail.files;
 		}}
 		class="filedrop"

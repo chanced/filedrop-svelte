@@ -11,41 +11,40 @@ export interface FileDropDragEventDetail extends FileDropEventDetail {
 	files: File[];
 	event: DragEvent;
 }
-type FileDropEventType = keyof Events;
+// type FileDropEventType = keyof Events;
 
-type FileDragEventType = Extract<
-	FileDropEventType,
-	| "filedragover"
-	| "filedragenter"
-	| "filedragleave"
-	| "windowfiledragenter"
-	| "windowfiledragleave"
-	| "windowfiledragover"
->;
+// type FileDragEventType = Extract<
+// 	FileDropEventType,
+// 	| "filedragover"
+// 	| "filedragenter"
+// 	| "filedragleave"
+// 	| "windowfiledragenter"
+// 	| "windowfiledragleave"
+// 	| "windowfiledragover"
+// >;
 
 // type FileDialogEventType = Extract<
 // 	FileDropEventType,
 // 	"filedialogopen" | "filedialogclose" | "filedialogcancel"
 // >;
 
-export class FileDropEvent<T extends FileDropEventDetail = FileDropEventDetail> extends CustomEvent<T> {
-	constructor(type: FileDropEventType, detail: T) {
-		super(type, { detail });
-	}
-}
+// export class FileDropEvent<T extends FileDropEventDetail = FileDropEventDetail> extends CustomEvent<T> {
+// 	constructor(type: FileDropEventType, detail: T) {
+// 		super(type, { detail });
+// 	}
+// }
 
-export class FileDropDragEvent extends FileDropEvent<FileDropDragEventDetail> {
-	constructor(type: FileDragEventType, detail: FileDropDragEventDetail) {
-		super(type, detail);
-	}
-}
+// export class FileDropDragEvent extends FileDropEvent<FileDropDragEventDetail> {
+// 	constructor(type: FileDragEventType, detail: FileDropDragEventDetail) {
+// 		super(type, detail);
+// 	}
+// }
 
 export interface FileDropSelectEventDetail extends FileDropEventDetail {
 	files: Files;
 	event: Event;
 	method: "drop" | "input";
 }
-export class FileDropSelectEvent extends FileDropEvent<FileDropSelectEventDetail> {}
 
 export interface Events {
 	filedrop: FileDropSelectEventDetail;

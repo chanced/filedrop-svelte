@@ -1,6 +1,6 @@
 import { browser } from "$app/env";
-import { FileDropDragEvent, FileDropEvent, FileDropSelectEvent, isEventWithFiles, isNode } from "$lib";
-import { getFilesFromEvent, extractFilesFromEvent } from "$lib/event";
+import type { Events } from "$lib/event";
+import { getFilesFromEvent, extractFilesFromEvent, isEventWithFiles, isNode } from "$lib/event";
 import type { FileDropOptions } from "$lib/options";
 
 import useragent from "$lib/useragent";
@@ -10,6 +10,11 @@ type Action = {
 };
 
 export const filedrop = function (node: HTMLElement, options?: FileDropOptions): Action {
+	function dispatch<K extends keyof Events, T extends Events[K] = Events[K]>(typ: K, detail: T): void {
+		node.dispatchEvent(
+			new CustomEvent<T>(typ, { detail }),
+		);
+	}
 	options = options || {};
 	let windowDrop = options.windowDrop === undefined || options.windowDrop;
 	let isFileDialogOpen = false;
@@ -25,15 +30,13 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 	async function handleChange(ev: Event) {
 		ev.preventDefault();
 		const files = await getFilesFromEvent(ev, options);
-		node.dispatchEvent(
-			new FileDropSelectEvent("filedrop", {
-				method: "input",
-				files,
-				isFileDialogOpen,
-				isDraggingFiles,
-				event: triggerEvent,
-			}),
-		);
+		dispatch("filedrop", {
+			method: "input",
+			files,
+			isFileDialogOpen,
+			isDraggingFiles,
+			event: triggerEvent,
+		});
 	}
 
 	async function handleDrop(ev: DragEvent) {
@@ -44,15 +47,13 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 		ev.preventDefault();
 		triggerEvent = ev;
 		const files = await getFilesFromEvent(ev, options);
-		node.dispatchEvent(
-			new FileDropSelectEvent("filedrop", {
-				method: "drop",
-				files,
-				isFileDialogOpen,
-				isDraggingFiles,
-				event: triggerEvent,
-			}),
-		);
+		dispatch("filedrop", {
+			method: "drop",
+			files,
+			isFileDialogOpen,
+			isDraggingFiles,
+			event: triggerEvent,
+		});
 	}
 
 	function openDialog() {
@@ -74,12 +75,10 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 	function handleInputClick(ev: Event) {
 		ev.stopPropagation();
 		isFileDialogOpen = true;
-		node.dispatchEvent(
-			new FileDropEvent("filedialogopen", {
-				isDraggingFiles,
-				isFileDialogOpen,
-			}),
-		);
+		dispatch("filedialogopen", {
+			isDraggingFiles,
+			isFileDialogOpen,
+		});
 	}
 
 	function handleClick(ev: Event) {
@@ -96,14 +95,12 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 		}
 		isDraggingFiles = false;
 		const files = await extractFilesFromEvent(ev);
-		document.dispatchEvent(
-			new FileDropDragEvent("windowfiledragleave", {
-				event: ev,
-				files,
-				isDraggingFiles,
-				isFileDialogOpen,
-			}),
-		);
+		dispatch("windowfiledragleave", {
+			event: ev,
+			files,
+			isDraggingFiles,
+			isFileDialogOpen,
+		});
 	}
 
 	async function handleDocumentDragOver(ev: DragEvent) {
@@ -113,14 +110,12 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 			return;
 		}
 		const files = await extractFilesFromEvent(ev);
-		document.dispatchEvent(
-			new FileDropDragEvent("windowfiledragover", {
-				event: ev,
-				files,
-				isDraggingFiles,
-				isFileDialogOpen,
-			}),
-		);
+		dispatch("windowfiledragover", {
+			event: ev,
+			files,
+			isDraggingFiles,
+			isFileDialogOpen,
+		});
 	}
 
 	async function handleDragEnter(ev: DragEvent) {
@@ -130,14 +125,12 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 		}
 		isDraggingFiles = true;
 		const files = await extractFilesFromEvent(ev);
-		node.dispatchEvent(
-			new FileDropDragEvent("filedragenter", {
-				files,
-				event: ev,
-				isDraggingFiles,
-				isFileDialogOpen,
-			}),
-		);
+		dispatch("filedragenter", {
+			files,
+			event: ev,
+			isDraggingFiles,
+			isFileDialogOpen,
+		});
 	}
 
 	async function handleDragLeave(ev: DragEvent) {
@@ -146,14 +139,12 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 			return;
 		}
 		const files = await extractFilesFromEvent(ev);
-		node.dispatchEvent(
-			new FileDropDragEvent("filedragleave", {
-				event: ev,
-				files,
-				isDraggingFiles,
-				isFileDialogOpen,
-			}),
-		);
+		dispatch("filedragleave", {
+			event: ev,
+			files,
+			isDraggingFiles,
+			isFileDialogOpen,
+		});
 	}
 	async function handleDragOver(ev: DragEvent) {
 		isDraggingFiles = isEventWithFiles(ev);
@@ -161,14 +152,12 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 			return;
 		}
 		const files = await extractFilesFromEvent(ev);
-		node.dispatchEvent(
-			new FileDropDragEvent("filedragover", {
-				event: ev,
-				files,
-				isDraggingFiles,
-				isFileDialogOpen,
-			}),
-		);
+		dispatch("filedragover", {
+			event: ev,
+			files,
+			isDraggingFiles,
+			isFileDialogOpen,
+		});
 	}
 
 	async function handleDocumentDrop(ev: DragEvent) {
@@ -185,15 +174,13 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 			return;
 		}
 		const files = await getFilesFromEvent(ev, options);
-		node.dispatchEvent(
-			new FileDropSelectEvent("filedrop", {
-				method: "drop",
-				event: ev,
-				files,
-				isDraggingFiles,
-				isFileDialogOpen,
-			}),
-		);
+		dispatch("filedrop", {
+			method: "drop",
+			event: ev,
+			files,
+			isDraggingFiles,
+			isFileDialogOpen,
+		});
 	}
 
 	function handleWindowFocus() {
@@ -204,19 +191,15 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 					if (!input?.files.length && t < 21) {
 						setTimeout(tick(t + 1), 35);
 					} else if (!input.files.length) {
-						node.dispatchEvent(
-							new FileDropEvent("filedialogcancel", {
-								isDraggingFiles,
-								isFileDialogOpen,
-							}),
-						);
+						dispatch("filedialogcancel", {
+							isDraggingFiles,
+							isFileDialogOpen,
+						});
 					} else {
-						node.dispatchEvent(
-							new FileDropEvent("filedialogclose", {
-								isDraggingFiles,
-								isFileDialogOpen,
-							}),
-						);
+						dispatch("filedialogclose", {
+							isDraggingFiles,
+							isFileDialogOpen,
+						});
 					}
 				};
 			};
