@@ -1,7 +1,6 @@
 import { browser } from "$app/env";
 import { FileDropDragEvent, FileDropEvent, FileDropSelectEvent, isEventWithFiles, isNode } from "$lib";
-import FileDrop from "$lib/components/FileDrop";
-import { Events, getFilesFromEvent, extractFilesFromEvent,  } from "$lib/event";
+import { getFilesFromEvent, extractFilesFromEvent } from "$lib/event";
 import type { FileDropOptions } from "$lib/options";
 
 import useragent from "$lib/useragent";
@@ -173,26 +172,26 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 	}
 
 	async function handleDocumentDrop(ev: DragEvent) {
-		ev.preventDefault()
+		ev.preventDefault();
 		isDraggingFiles = isEventWithFiles(ev);
 		if (!isDraggingFiles) {
 			return;
 		}
-		if(isNode(ev.currentTarget) && (node.isEqualNode(ev.currentTarget) || node.contains(ev.currentTarget)){
+		if (isNode(ev.currentTarget) && (node.isEqualNode(ev.currentTarget) || node.contains(ev.currentTarget))) {
 			// let it bubble
-			return 
+			return;
 		}
-		if(options.windowDrop !== undefined && !options.windowDrop){
-			return
+		if (!windowDrop) {
+			return;
 		}
 		const files = await getFilesFromEvent(ev, options);
 		node.dispatchEvent(
 			new FileDropSelectEvent("filedrop", {
-				method:"drop",
+				method: "drop",
 				event: ev,
 				files,
 				isDraggingFiles,
-				isFileDialogOpen
+				isFileDialogOpen,
 			}),
 		);
 	}
@@ -236,10 +235,10 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 			node.addEventListener("drop", handleDrop);
 			input.addEventListener("change", handleChange);
 			input.addEventListener("click", handleInputClick);
-			document.addEventListener("dragenter", handleDocumentDragEnter)
-			document.addEventListener("dragleave", handleDocumentDragLeave)
-			document.addEventListener("dragover", handleDocumentDragOver)
-			document.addEventListener("drop",  handleDocumentDrop)
+			document.addEventListener("dragenter", handleDocumentDragEnter);
+			document.addEventListener("dragleave", handleDocumentDragLeave);
+			document.addEventListener("dragover", handleDocumentDragOver);
+			document.addEventListener("drop", handleDocumentDrop);
 			if (options.clickToUpload === undefined || options.clickToUpload) {
 				node.addEventListener("click", handleClick);
 			} else {
