@@ -33,16 +33,22 @@
 				"src/lib/*"
 			],
 			"$components": [
-				"src/components"
+				"src/lib/components"
 			],
 			"$components/*": [
-				"src/components/*"
+				"src/lib/components/*"
 			],
 			"$actions": [
-				"src/actions"
+				"src/lib/actions"
 			],
 			"$actions/*": [
-				"src/actions/*"
+				"src/lib/actions/*"
+			],
+			"$stores": [
+				"src/lib/stores"
+			],
+			"$stores/*": [
+				"src/lib/stores/*"
 			],
 		}
 	},

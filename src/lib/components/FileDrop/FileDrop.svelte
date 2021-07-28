@@ -1,41 +1,15 @@
-<!-- <script lang="ts" context="module">
-	export interface FileDrop {
-		setMultiple(value: boolean): void;
-		setStyle(value: string | undefined): void;
-		setAccept(value: string | string[] | undefined): void;
-		setContainerClass: (value: string | string[] | null | undefined) => void;
-		disable(): void;
-		enable(): void;
-	}
-
-	type ContainerEvent = Event & {
-		currentTarget: EventTarget & HTMLInputElement;
-	};
-
-	type ContainerKeyboardEvent = KeyboardEvent & ContainerEvent;
-	type ContainerFocusEvent = FocusEvent & ContainerEvent;
-	type ContainerDragEvent = DragEvent & ContainerEvent;
-	type ContainerMouseEvent = MouseEvent & ContainerEvent;
-	export interface Instance {
-		setTabIndex(value: number): void;
-		setContainerClass(value: string | string[] | null | undefined): void;
-	}
-
-	type InputEvent = Event & {
-		currentTarget: EventTarget & HTMLInputElement;
-	};
-</script> -->
 <script lang="ts">
-	import filedrop from "$actions/filedrop";
-	import type { Events } from "$lib";
+	import filedrop from "$lib/actions/filedrop";
 	import { fromEvent as filesFromEvent } from "file-selector";
 	import { onMount, onDestroy, createEventDispatcher } from "svelte";
-	import { isString, isArrayOfStrings } from "$lib";
+	import { isString, isArrayOfStrings } from "$lib/util";
+	import type { Events } from "$lib/event";
+	export let id: string = undefined;
 	export let disableStyles = false;
-	export let style: string | undefined;
+	export let style: string = undefined;
 	export let tabIndex: number = 0;
 	export let containerClass = $$props.class as string | undefined;
-	export let accept: string | string[] | undefined;
+	export let accept: string | string[] = undefined;
 	export let multiple: boolean = false;
 	export let disabled: boolean = false;
 
@@ -48,7 +22,7 @@
 	let isDragActive = false;
 	let isDragReject = false;
 	let isFileDialogActive = false;
-	let acceptTypes: string[];
+	let acceptTypes: string[] | undefined;
 
 	$: {
 		if (isString(accept)) {
@@ -56,7 +30,7 @@
 		} else if (isArrayOfStrings(accept)) {
 			acceptTypes = accept;
 		} else {
-			acceptTypes = [];
+			acceptTypes = undefined;
 		}
 	}
 
@@ -144,6 +118,7 @@
 	on:fileselect={(ev) => {
 		console.log(ev.detail.files);
 	}}
+	{id}
 >
 	<input
 		accept={acceptTypes.join(",")}

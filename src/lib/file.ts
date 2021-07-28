@@ -29,12 +29,13 @@ export function processFiles(files: FileWithPath[], options: FileDropOptions): F
 	return files.reduce(
 		(accumulator, file) => {
 			let error = checkFile(file, options);
+			console.log("error", error);
 			if (error != undefined) {
 				accumulator.errors.push(error);
 			} else if (fileLimit > 0 && count > fileLimit) {
 				error = new FileCountExceededError(file, fileLimit);
 			}
-			if (error == undefined) {
+			if (error != undefined) {
 				accumulator.errors.push(error);
 			} else {
 				accumulator.accepted.push(file);
@@ -51,16 +52,22 @@ export function checkFile(file: File, params: CheckParams): FileDropError | unde
 	return checkFileType(file, accept) || checkFileSize(file, { min, max });
 }
 
-export function checkFileType(file: File, accepts: string | string[]): InvalidFileTypeError | undefined {
+export function checkFileType(
+	file: File,
+	accept: string | string[] | undefined,
+): InvalidFileTypeError | undefined {
 	// Firefox versions prior to 53 return a bogus MIME type for every file drag, so dragovers with
 	// that MIME type will always be accepted
-	if (typeof accepts === "string") {
-		accepts = accepts.split(",");
+	if (accept != undefined) {
+		if (typeof accept === "string") {
+			accept = accept.split(",");
+		}
+		accept.push("application/x-moz-file");
+		if (!doesAccept(file, accept)) {
+			return new InvalidFileTypeError(file, accept);
+		}
 	}
-	accepts.push("application/x-moz-file");
-	if (!doesAccept(file, accepts)) {
-		return new InvalidFileTypeError(file, accepts);
-	}
+	return undefined;
 }
 
 export function checkMinFileSize(file: File, min?: number | null): FileSizeMinimumNotMetError | undefined {

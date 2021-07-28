@@ -1,25 +1,63 @@
+import type { FileDropOptions } from "$lib";
 import { FileWithPath, fromEvent } from "file-selector";
 import { processFiles, Files, isFileWithPath } from "./file";
-export interface Events {
-	fileselect: FileSelectEvent;
-	dialogcancel: undefined;
-	dialogclose: undefined;
-	dialogopen: undefined;
+
+export interface FileDropEventDetail {
+	isFileDialogOpen: boolean;
+	isDraggingFiles: boolean;
 }
 
-export interface FileDropOptions {
-	accept?: string | string[];
-	maxSize?: number;
-	minSize?: number;
-	fileLimit?: number;
-	multiple?: boolean;
-	disabled?: boolean;
-	input?: HTMLInputElement;
-	documentDrop?: boolean;
+export interface FileDropDragEventDetail extends FileDropEventDetail {
+	files: File[];
+	event: DragEvent;
+}
+type FileDropEventType = keyof Events;
+
+type FileDragEventType = Extract<
+	FileDropEventType,
+	| "filedragover"
+	| "filedragenter"
+	| "filedragleave"
+	| "windowfiledragenter"
+	| "windowfiledragleave"
+	| "windowfiledragover"
+>;
+
+// type FileDialogEventType = Extract<
+// 	FileDropEventType,
+// 	"filedialogopen" | "filedialogclose" | "filedialogcancel"
+// >;
+
+export class FileDropEvent<T extends FileDropEventDetail = FileDropEventDetail> extends CustomEvent<T> {
+	constructor(type: FileDropEventType, detail: T) {
+		super(type, { detail });
+	}
 }
 
-export interface FileSelectEvent {
+export class FileDropDragEvent extends FileDropEvent<FileDropDragEventDetail> {
+	constructor(type: FileDragEventType, detail: FileDropDragEventDetail) {
+		super(type, detail);
+	}
+}
+
+export interface FileDropSelectEventDetail extends FileDropEventDetail {
 	files: Files;
+	event: Event;
+	method: "drop" | "input";
+}
+export class FileDropSelectEvent extends FileDropEvent<FileDropSelectEventDetail> {}
+
+export interface Events {
+	filedrop: FileDropSelectEventDetail;
+	filedragenter: FileDropDragEventDetail;
+	filedragleave: FileDropDragEventDetail;
+	filedragover: FileDropDragEventDetail;
+	filedialogcancel: FileDropEventDetail;
+	filedialogclose: FileDropEventDetail;
+	filedialogopen: FileDropEventDetail;
+	windowfiledragenter: FileDropDragEventDetail;
+	windowfiledragleave: FileDropDragEventDetail;
+	windowfiledragover: FileDropDragEventDetail;
 }
 
 export function isDragEvent(event: Event | DragEvent): event is DragEvent {
@@ -52,7 +90,7 @@ export function isEventWithFiles(ev: Event): boolean {
 	);
 }
 
-async function extractFilesFromEvent(ev: Event): Promise<FileWithPath[]> {
+export async function extractFilesFromEvent(ev: Event): Promise<FileWithPath[]> {
 	const res = await fromEvent(ev);
 	const files = res.map((f) => (isFileWithPath(f) ? f : f.getAsFile()));
 	return files as FileWithPath[];
@@ -61,4 +99,8 @@ async function extractFilesFromEvent(ev: Event): Promise<FileWithPath[]> {
 export async function getFilesFromEvent(ev: Event, opts: FileDropOptions): Promise<Files> {
 	const files = await extractFilesFromEvent(ev);
 	return processFiles(files, opts);
+}
+
+export function isNode(target: EventTarget | Node): target is Node {
+	return "childNodes" in target;
 }
