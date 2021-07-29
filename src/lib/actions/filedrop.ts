@@ -330,12 +330,13 @@ export const filedrop = function (node: HTMLElement, opts?: FileDropOptions): Ac
 
 	function init(opts: FileDropOptions) {
 		options = configOptions(node, opts);
-		console.log(options)
+		console.log(options);
 		input = options.input;
+		node.tabIndex = options.tabIndex;
+
 		if (!options.disabled) {
 			node.classList.remove("disabled");
 			input.multiple = options.multiple;
-
 			if (options.accept?.length) {
 				if (Array.isArray(options.accept)) {
 					input.accept = options.accept.join(",");
@@ -347,31 +348,33 @@ export const filedrop = function (node: HTMLElement, opts?: FileDropOptions): Ac
 			}
 
 			input.autocomplete = "off";
-			if(options.hideInput){
-				input.style.display = "none"
-			}
-			node.addEventListener("dragenter", handleDragEnter);
-			node.addEventListener("dragleave", handleDragLeave);
-			node.addEventListener("dragover", handleDragOver);
-			node.addEventListener("drop", handleDrop);
-
-			input.addEventListener("change", handleChange);
-			input.addEventListener("click", handleInputClick);
-
-			if (options.clickToUpload) {
-				node.addEventListener("click", handleClick);
-			} else {
-				node.removeEventListener("click", handleClick);
-			}
-
 			if (options.hideInput) {
-				node.addEventListener("keydown", handleKeyDown);
-			}
-			if (!options.hideInput && !options.clickToUpload) {
-				node.removeEventListener("keydown", handleKeyDown);
+				input.style.display = "none";
 			}
 
 			if (isBrowser) {
+				node.addEventListener("dragenter", handleDragEnter);
+				node.addEventListener("dragleave", handleDragLeave);
+				node.addEventListener("dragover", handleDragOver);
+				node.addEventListener("drop", handleDrop);
+
+				input.addEventListener("change", handleChange);
+				input.addEventListener("click", handleInputClick);
+
+				if (options.clickToUpload) {
+					node.addEventListener("click", handleClick);
+				} else {
+					node.removeEventListener("click", handleClick);
+				}
+
+				if (options.hideInput) {
+					node.addEventListener("keydown", handleKeyDown);
+				}
+
+				if (!options.hideInput && !options.clickToUpload) {
+					node.removeEventListener("keydown", handleKeyDown);
+				}
+
 				window.addEventListener("focus", handleWindowFocus);
 				document.addEventListener("dragenter", handleDocumentDragEnter);
 				document.addEventListener("dragleave", handleDocumentDragLeave);
@@ -407,7 +410,6 @@ export const filedrop = function (node: HTMLElement, opts?: FileDropOptions): Ac
 	return {
 		update(opts?: FileDropOptions) {
 			init(opts || {});
-
 		},
 		destroy() {
 			teardown();
