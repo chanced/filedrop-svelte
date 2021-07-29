@@ -79,12 +79,12 @@ dropfile comes with both a component and an action. The component is basically a
 
 ### Errors
 
-| class                          | reason                                                        | code                                    | name                       |
-| ------------------------------ | ------------------------------------------------------------- | --------------------------------------- | -------------------------- |
-| `InvalidFileTypeError`         | file type does not satisfy `accept`                           | `0` `ErrorCode.InvalidFileType`         | `"invalid file type"`      |
-| `FileCountExceededError`       | total number of files selected or droppped exceed `fileLimit` | `1` `ErrorCode.FileCountExceededError`  | `"file count exceeded"`    |
-| `FileSizeMinimumNotMetError`   | file does not satisify `minSize`                              | `2` `ErrorCode.FileSizeMinimumNotMet`   | `"min file size not met"`  |
-| `FileSizeMaximumExceededError` | file does not satisify `maxSize`                              | `3` `ErrorCode.FileSizeMaximumExceeded` | `"max file size exceeded"` |
+| class                          | reason                                                        | ErrorCode                     | name                       |
+| ------------------------------ | ------------------------------------------------------------- | ----------------------------- | -------------------------- |
+| `InvalidFileTypeError`         | file type does not satisfy `accept`                           | `0` `InvalidFileType`         | `"invalid file type"`      |
+| `FileCountExceededError`       | total number of files selected or droppped exceed `fileLimit` | `1` `FileCountExceededError`  | `"file count exceeded"`    |
+| `FileSizeMinimumNotMetError`   | file does not satisify `minSize`                              | `2` `FileSizeMinimumNotMet`   | `"min file size not met"`  |
+| `FileSizeMaximumExceededError` | file does not satisify `maxSize`                              | `3` `FileSizeMaximumExceeded` | `"max file size exceeded"` |
 
 };
 
