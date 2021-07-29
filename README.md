@@ -61,7 +61,7 @@ dropfile comes with both a component and an action. The component is basically a
 </div>
 ```
 
-## Notes
+## References
 
 ### Previous art
 
