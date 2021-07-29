@@ -1,10 +1,23 @@
 {
-	"name": "filedrop",
-	"version": "0.0.1",
+	"name": "filedrop-svelte",
+	"version": "0.0.2",
 	"author": {
 		"name": "chance dinkins",
 		"email": "chanceusc@gmail.com"
 	},
+	"license": "mit",
+	"repository": {
+		"url": "https://github.com/chanced/filedrop-svelte",
+		"type": "git"
+	},
+	"keywords": [
+		"svelte",
+		"sveltekit",
+		"typescript",
+		"dropzone",
+		"drag and drop"
+	],
+	"description": "svelte component and action to create drag-and-drop file dropzones.",
 	"scripts": {
 		"package": "svelte-kit package",
 		"dev": "svelte-kit dev",

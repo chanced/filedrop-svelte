@@ -17,8 +17,9 @@
 	export let fileLimit: number = undefined;
 	export let clickToUpload = true;
 	export let input: HTMLInputElement = undefined;
+	let options: FileDropOptions = {};
 	$: {
-		let options: FileDropOptions = {
+		options = {
 			id,
 			style,
 			accept,
@@ -47,7 +48,7 @@
 <div
 	{id}
 	class:filedrop={!containerClass}
-	use:filedrop
+	use:filedrop={options}
 	on:filedrop={proxy("filedrop")}
 	on:filedialogcancel={proxy("filedialogcancel")}
 	on:filedialogclose={proxy("filedialogclose")}

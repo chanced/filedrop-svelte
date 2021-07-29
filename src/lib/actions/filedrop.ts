@@ -306,7 +306,11 @@ function getInputElement(node: HTMLElement, { input }: FileDropOptions): HTMLInp
 	}
 	const inputs = node.querySelectorAll("input[type='file']");
 	if (!inputs.length) {
-		throw new Error("FileDrop: container node must contain a file input");
+		const input = document.createElement("input");
+		input.setAttribute("type", "file");
+		input.style.display = "none";
+		input.tabIndex = -1;
+		return node.appendChild(input);
 	}
 	if (inputs.length > 1) {
 		throw new Error(

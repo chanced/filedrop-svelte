@@ -29,7 +29,6 @@
 			/></svg
 		>
 		<p>Upload content (action)</p>
-		<input type="file" />
 	</div>
 	{#if files}
 		<h3>Accepted Files</h3>
@@ -48,7 +47,7 @@
 		</ul>
 	{/if}
 </div>
-<label><input type="checkbox" bind:checked={disabled} /> Disabled</label>
+<label><input type="checkbox" bind:checked={disabled} />Disabled</label>
 
 <style>
 	.container {
