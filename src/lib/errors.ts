@@ -7,20 +7,14 @@ export enum ErrorCode {
 	FileCountExceeded,
 }
 
-import type { FileWithPath } from "file-selector";
+export const errorCodeNames = {
+	[ErrorCode.InvalidFileType]: "invalid file type",
+	[ErrorCode.FileCountExceeded]: "file count exceeded",
+	[ErrorCode.FileSizeMinimumNotMet]: "min file size not met",
+	[ErrorCode.FileSizeMaximumExceeded]: "max file size exceeded",
+};
 
-function getName(code: ErrorCode): string {
-	switch (code) {
-		case ErrorCode.InvalidFileType:
-			return "invalid file type";
-		case ErrorCode.FileCountExceeded:
-			return "file count exceeded";
-		case ErrorCode.FileSizeMinimumNotMet:
-			return "min file size";
-		case ErrorCode.FileSizeMaximumExceeded:
-			return "max file size";
-	}
-}
+import type { FileWithPath } from "file-selector";
 
 export class FileDropError extends Error {
 	code: ErrorCode;
@@ -31,7 +25,7 @@ export class FileDropError extends Error {
 		this.code = code;
 		this.message = message;
 		this.file = file;
-		this.name = getName(code);
+		this.name = errorCodeNames[code];
 	}
 }
 export class InvalidFileTypeError extends FileDropError {

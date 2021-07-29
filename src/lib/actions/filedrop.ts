@@ -41,6 +41,8 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 			isFileDialogOpen,
 			isDraggingFiles,
 			event: triggerEvent,
+			id: options.id,
+			options,
 		});
 	}
 
@@ -55,6 +57,8 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 		dispatch("filedrop", {
 			method: "drop",
 			files,
+			options,
+			id: options.id,
 			isFileDialogOpen,
 			isDraggingFiles,
 			event: triggerEvent,
@@ -83,6 +87,8 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 		dispatch("filedialogopen", {
 			isDraggingFiles,
 			isFileDialogOpen,
+			id: options.id,
+			options,
 		});
 	}
 
@@ -105,6 +111,8 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 			files,
 			isDraggingFiles,
 			isFileDialogOpen,
+			id: options.id,
+			options,
 		});
 	}
 
@@ -120,6 +128,8 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 			files,
 			isDraggingFiles,
 			isFileDialogOpen,
+			id: options.id,
+			options,
 		});
 	}
 
@@ -135,6 +145,8 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 			event: ev,
 			isDraggingFiles,
 			isFileDialogOpen,
+			id: options.id,
+			options,
 		});
 	}
 
@@ -149,6 +161,8 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 			files,
 			isDraggingFiles,
 			isFileDialogOpen,
+			id: options.id,
+			options,
 		});
 	}
 	async function handleDragOver(ev: DragEvent) {
@@ -162,6 +176,8 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 			files,
 			isDraggingFiles,
 			isFileDialogOpen,
+			id: options.id,
+			options,
 		});
 	}
 
@@ -185,6 +201,8 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 			files,
 			isDraggingFiles,
 			isFileDialogOpen,
+			id: options.id,
+			options,
 		});
 	}
 
@@ -199,11 +217,15 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 						dispatch("filedialogcancel", {
 							isDraggingFiles,
 							isFileDialogOpen,
+							id: options.id,
+							options,
 						});
 					} else {
 						dispatch("filedialogclose", {
 							isDraggingFiles,
 							isFileDialogOpen,
+							id: options.id,
+							options,
 						});
 					}
 				};
@@ -216,12 +238,16 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 		if (options.fileLimit === 1) {
 			options.multiple = false;
 		}
+		if (options.fileLimit === 0) {
+			options.disabled = true;
+		}
 		if (options.fileLimit == undefined || options.fileLimit > 1) {
 			options.multiple = true;
 		}
 		if ((options.multiple === undefined && options.fileLimit > 1) || options.fileLimit === undefined) {
 			options.multiple = true;
 		}
+
 		if (!options.disabled) {
 			windowDrop = options.windowDrop === undefined || options.windowDrop;
 			node.classList.remove("disabled");

@@ -12,7 +12,7 @@ npm i filedrop-svelte -D
 
 ## Usage
 
-dropfile comes with both a component and an action. The component is basically a wrapper around the action with some very minimal styling as an example.
+dropfile comes with both a component and an action. The component is basically a wrapper around the action with some some default styling.
 
 ### Component
 
@@ -61,7 +61,32 @@ dropfile comes with both a component and an action. The component is basically a
 </div>
 ```
 
-## References
+## Reference
+
+### Options
+
+| parameter       | purpose                                                                                                                                                                                                                                                   | type                | default     |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ----------- |
+| `accept`        | specify file types to accept. See [HTML attribute: accept on MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept) for more information.                                                                                     | `string` `string[]` | `undefined` |
+| `maxSize`       | the maximum size a file can be in bytes.                                                                                                                                                                                                                  | `number`            | `undefined` |
+| `minSize`       | the minimum size a file can be in bytes.                                                                                                                                                                                                                  | `number`            | `undefined` |
+| `fileLimit`     | total number of files allowed in a transaction. A value of 0 disables the action/component, 1 turns multiple off, and any other value enables multiple. Any attempt to upload more files than allowed will result in the files being placed in rejections | `numer`             | `undefined` |
+| `multiple`      | sets the file input to `multiple`. See [HTML attribute: multiple on MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/multiple) for more information.                                                                            | `boolean`           | `true`      |
+| `disabled`      | disables the action/component, removing all event listeners                                                                                                                                                                                               | `boolean`           | `false`     |
+| `windowDrop`    | determines whether or not files can be dropped anywhere in the window. A value of `false` would require that the files be droppped within the `<FileDrop>` component or the element with `use:filedrop`.                                                  | `boolean`           | `true`      |
+| `clickToUpload` | causes the containing element to be treated as the input. Disabling this does not change the `tabindex` of the container or remove the `keydown` eventListener                                                                                            | `boolean`           | `true`      |
+| `input`         | allows you to explicitly pass the file `HTMLInputElement` as a parameter. If this `undefined`, the action will search for `input[type="file"]`. If one is not found, it will be appeneded to the element with `use:filedrop`                              | `HTMLInputElement`  | `undefined` |
+
+### Errors
+
+| class                          | reason                                                        | code                                    | name                       |
+| ------------------------------ | ------------------------------------------------------------- | --------------------------------------- | -------------------------- |
+| `InvalidFileTypeError`         | file type does not satisfy `accept`                           | `0` `ErrorCode.InvalidFileType`         | `"invalid file type"`      |
+| `FileCountExceededError`       | total number of files selected or droppped exceed `fileLimit` | `1` `ErrorCode.FileCountExceededError`  | `"file count exceeded"`    |
+| `FileSizeMinimumNotMetError`   | file does not satisify `minSize`                              | `2` `ErrorCode.FileSizeMinimumNotMet`   | `"min file size not met"`  |
+| `FileSizeMaximumExceededError` | file does not satisify `maxSize`                              | `3` `ErrorCode.FileSizeMaximumExceeded` | `"max file size exceeded"` |
+
+};
 
 ### Alternatives
 
