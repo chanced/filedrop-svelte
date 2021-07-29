@@ -1,5 +1,4 @@
 import preprocess from 'svelte-preprocess';
-import path from 'path'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -9,13 +8,7 @@ const config = {
 	kit: {
 		
 		vite: {
-			resolve: {
-				alias: {
-					$components: path.resolve('./src/lib/components'),
-					$actions: path.resolve('./src/lib/actions'),
-					$stores: path.resolve("./src/lib/stores")
-				}
-			},
+			resolve: {},
 
 		},
 		target: '#svelte'

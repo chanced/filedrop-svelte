@@ -32,24 +32,6 @@
 			"$lib/*": [
 				"src/lib/*"
 			],
-			"$components": [
-				"src/lib/components"
-			],
-			"$components/*": [
-				"src/lib/components/*"
-			],
-			"$actions": [
-				"src/lib/actions"
-			],
-			"$actions/*": [
-				"src/lib/actions/*"
-			],
-			"$stores": [
-				"src/lib/stores"
-			],
-			"$stores/*": [
-				"src/lib/stores/*"
-			],
 		}
 	},
 	"include": [

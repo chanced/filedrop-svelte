@@ -1,5 +1,5 @@
 <script lang="ts">
-	import filedrop from "$actions/filedrop";
+	import filedrop from "$lib/actions/filedrop";
 	import type { Files } from "$lib";
 	import fileSize from "filesize";
 	import FileDrop from "$lib/components/FileDrop";
