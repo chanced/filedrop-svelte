@@ -63,11 +63,11 @@ dropfile comes with both a component and an action. The component is basically a
 
 ## References
 
-### Previous art
-
-- [svelte-file-dropzone](https://github.com/thecodejack/svelte-file-dropzone).
-
 ### Alternatives
+
+- [svelte-file-dropzone](https://github.com/thecodejack/svelte-file-dropzone)
+
+### Previous art
 
 - [svelte-file-dropzone](https://github.com/thecodejack/svelte-file-dropzone)
 
@@ -84,3 +84,7 @@ dropfile comes with both a component and an action. The component is basically a
 - tests
 - better documentation
 - demo website
+
+## License
+
+MIT
