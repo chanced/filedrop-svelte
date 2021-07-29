@@ -65,48 +65,41 @@
 		<p>Drag &amp; drop or select to upload {isMulti ? "files" : "a file "}</p>
 	</slot>
 </div>
-{#if !disableStyles && !containerClass}
-	<style>
-		.filedrop {
-			background-color: #f0f0f0;
-			height: 200px;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			border-radius: 0.375rem;
-			border: 0.7em dashed #c3c3c3;
-			outline: 1em solid #f0f0f0;
-			transition: border 0.3s ease-in-out;
-			outline-offset: -1.3em;
-			padding: 0.475em;
-		}
-		.filedrop:focus {
-			border-color: #2196f3;
-		}
-		.filedrop:hover {
-			border-color: #343434;
-		}
-		.filedrop p,
-		.filedrop svg {
-			transition: color 0.1s;
-			transition: fill 0.1s;
-		}
-		.filedrop:focus p,
-		.filedrop:focus svg {
-			color: #2196f3;
-			fill: #2196f3;
-		}
-		.filedrop:hover p,
-		.filedrop:hover svg {
-			color: #343434;
-			fill: #343434;
-		}
-		p {
-			color: #373737;
-			font-size: 1.2em;
-			cursor: default;
-			align-content: center;
-		}
-	</style>
-{/if}
+
+<style>
+	.filedrop {
+		background-color: #f0f0f0;
+		height: 200px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		border-radius: 0.375rem;
+		border: 0.7em dashed #c3c3c3;
+		outline: 1em solid #f0f0f0;
+		transition: border 0.3s ease-in-out;
+		outline-offset: -1.3em;
+		padding: 0.475em;
+	}
+	.filedrop:focus {
+		border-color: #2196f3;
+	}
+	.filedrop:hover {
+		border-color: #343434;
+	}
+	.filedrop p {
+		transition: color 0.1s;
+		transition: fill 0.1s;
+	}
+	.filedrop:focus p {
+		color: #2196f3;
+		fill: #2196f3;
+	}
+	.filedrop:hover p,
+	p {
+		color: #373737;
+		font-size: 1.2em;
+		cursor: default;
+		align-content: center;
+	}
+</style>

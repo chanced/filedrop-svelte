@@ -16,6 +16,8 @@ dropfile comes with both a component and an action. The component is basically a
 
 ### Component
 
+See [this REPL for minmimal usage](https://svelte.dev/repl/511ad04931514bcf98f7408edb08d075?version=3.41.0).
+
 ```html
 <script>
 	import FileDrop from "filedrop-svelte";
@@ -45,6 +47,8 @@ dropfile comes with both a component and an action. The component is basically a
 ```
 
 ### Action
+
+See this [REPL for minimal usage](https://svelte.dev/repl/645841f327b8484093f94b84de8a7e64?version=3.41.0).
 
 ```html
 <script>
