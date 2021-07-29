@@ -34,9 +34,12 @@
 	$: isMulti = (fileLimit === undefined || fileLimit > 1) && (multiple === undefined || multiple);
 	const dispatch = createEventDispatcher<Events>();
 
-	function proxy<T extends keyof Events, D extends Events[T] = Events[T]>(type: T): ({ detail: D }) => void {
-		return function ({ detail }) {
-			dispatch(type, detail);
+	function proxy<T extends keyof Events, E extends CustomEvent<Events[T]> = CustomEvent<Events[T]>>(
+		type: T,
+	): (ev: E) => void {
+		return function (ev) {
+			ev.stopPropagation();
+			dispatch(type, ev.detail);
 		};
 	}
 </script>
@@ -58,7 +61,7 @@
 >
 	<input type="file" />
 	<slot>
-		<p>Drag &amp; drop or click to upload {isMulti ? "files" : "a file "}</p>
+		<p>Drag &amp; drop or select to upload {isMulti ? "files" : "a file "}</p>
 	</slot>
 </div>
 {#if !disableStyles && !containerClass}
@@ -71,10 +74,10 @@
 			align-items: center;
 			justify-content: center;
 			border-radius: 0.375rem;
-			border: 1.3em dashed #c3c3c3;
-			outline: 3.2em solid #f0f0f0;
+			border: 0.7em dashed #c3c3c3;
+			outline: 1em solid #f0f0f0;
 			transition: border 0.3s ease-in-out;
-			outline-offset: -3.4em;
+			outline-offset: -1.3em;
 		}
 		.filedrop:focus {
 			border-color: #2196f3;
@@ -98,14 +101,10 @@
 			fill: #343434;
 		}
 		p {
-			color: #787878;
+			color: #373737;
 			font-size: 1.2em;
 			cursor: default;
 			align-content: center;
-		}
-		svg {
-			fill: #787878;
-			display: block;
 		}
 	</style>
 {/if}

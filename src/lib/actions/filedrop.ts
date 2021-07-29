@@ -216,7 +216,6 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 		if (options.fileLimit === 1) {
 			options.multiple = false;
 		}
-
 		if (options.fileLimit == undefined || options.fileLimit > 1) {
 			options.multiple = true;
 		}
@@ -266,9 +265,10 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 		node.removeEventListener("dragleave", handleDragLeave);
 		node.removeEventListener("dragover", handleDragOver);
 		node.removeEventListener("drop", handleDrop);
+		node.removeEventListener("click", handleClick);
 		input.removeEventListener("change", handleChange);
 		input.removeEventListener("click", handleInputClick);
-
+		input.files = null;
 		if (browser) {
 			document.removeEventListener("dragover", handleDocumentDragOver);
 			document.removeEventListener("dragenter", handleDocumentDragEnter);

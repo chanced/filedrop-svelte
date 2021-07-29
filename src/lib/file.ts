@@ -34,7 +34,6 @@ export function processFiles(files: FileWithPath[], options: FileDropOptions): F
 	return files.reduce(
 		(accumulator, file) => {
 			let error = checkFile(file, options);
-			console.log("error", error);
 			if (error != undefined) {
 				accumulator.rejected.push({ file, error });
 				return accumulator;
