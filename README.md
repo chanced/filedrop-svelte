@@ -100,7 +100,6 @@ dropfile comes with both a component and an action. The component is basically a
 - [file-selector](https://github.com/react-dropzone/file-selector)
 - [filesize](https://github.com/avoidwork/filesize.js)
 - [ua-parser-js](https://github.com/faisalman/ua-parser-js)
-- [playwright](https://playwright.dev/)
 
 ## Todo
 
