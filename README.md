@@ -20,7 +20,7 @@ dropfile comes with both a component and an action. The component is basically a
 <script>
 	import FileDrop from "filedrop-svelte";
 	import type { Files } from "filedrop-svelte";
-    import fileSize from "filesize";
+	import fileSize from "filesize";
 	let files: Files;
 </script>
 
@@ -52,7 +52,7 @@ dropfile comes with both a component and an action. The component is basically a
 	import { filedrop } from "filedrop-svelte";
 	import type { Files, FileDropOptions } from "filedrop-svelte";
 	let options: FileDropOptions = {};
-    let files: Files;
+	let files: Files;
 </script>
 
 <div use:filedrop="{options}" on:filedrop={(e) => {files = e.detail.files}}>
