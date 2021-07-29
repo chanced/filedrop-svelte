@@ -54,7 +54,7 @@ dropfile comes with both a component and an action. The component is basically a
 	let files: Files;
 </script>
 
-<div use:filedrop="{options}" on:filedrop={(e) => {files = e.detail.files}}>
+<div use:filedrop={options} on:filedrop={(e) => {files = e.detail.files}}>
 	<!-- you can add your input[type="file"] here if you want.
 	or you can omit it and it'll be appended -->
 	Drag &amp; drop files
