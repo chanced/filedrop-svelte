@@ -13,5 +13,5 @@ export function isString(value: unknown): value is string {
 	return typeof value === "string";
 }
 export function isBrowser(): boolean {
-	return typeof window == "undefined";
+	return typeof window !== "undefined";
 }

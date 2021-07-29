@@ -31,7 +31,6 @@
 			multiple,
 		};
 	}
-	$: isMulti = (fileLimit === undefined || fileLimit > 1) && (multiple === undefined || multiple);
 	const dispatch = createEventDispatcher<Events>();
 
 	function proxy<T extends keyof Events, E extends CustomEvent<Events[T]> = CustomEvent<Events[T]>>(
@@ -42,6 +41,8 @@
 			dispatch(type, ev.detail);
 		};
 	}
+
+	$: isMulti = (fileLimit === undefined || fileLimit > 1) && (multiple === undefined || multiple);
 </script>
 
 <div
