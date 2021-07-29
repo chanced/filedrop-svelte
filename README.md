@@ -81,18 +81,18 @@ dropfile comes with both a component and an action. The component is basically a
 
 ### Events
 
-| event               | description                                                                                                              | `event.detail`        |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------- |
-| filedrop            | one or more files has been selected in the file dialog or drag-and-dropped                                               | `FileDropSelectEvent` |
-| filedragenter       | a dragenter event has occurred on the container element containnig one or more files                                     | `FileDropDragEvent`   |
-| filedragleave       | a dragleave event has occurred on the container element containing one or more files                                     | `FileDropDragEvent`   |
-| filedragover        | a dragover event has occurred on the container element containing one or more files                                      | `FileDropDragEvent`   |
-| filedialogcancel    | the file dialog has been canceled without selecting files                                                                | `FileDropEvent`       |
-| filedialogclose     | the file dialog has been closed with files selected                                                                      | `FileDropEvent`       |
-| filedialogopen      | the file dialog has been opened                                                                                          | `FileDropEvent`       |
-| windowfiledragenter | a dragenter event has occurred on the document (event is named windowfiledragenter so not to confuse document with file) | `FileDropDragEvent`   |
-| windowfiledragleave | a dragleave event has occurred on the document (event is named windowfiledragleave so not to confuse document with file) | `FileDropDragEvent`   |
-| windowfiledragover  | a dragover event has occurred on the document (event is named windowfiledragover so not to confuse document with file)   | `FileDropDragEvent`   |
+| event                 | description                                                                                                              | `event.detail`        |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------- |
+| `filedrop`            | one or more files has been selected in the file dialog or drag-and-dropped                                               | `FileDropSelectEvent` |
+| `filedragenter`       | a dragenter event has occurred on the container element containnig one or more files                                     | `FileDropDragEvent`   |
+| `filedragleave`       | a dragleave event has occurred on the container element containing one or more files                                     | `FileDropDragEvent`   |
+| `filedragover`        | a dragover event has occurred on the container element containing one or more files                                      | `FileDropDragEvent`   |
+| `filedialogcancel`    | the file dialog has been canceled without selecting files                                                                | `FileDropEvent`       |
+| `filedialogclose`     | the file dialog has been closed with files selected                                                                      | `FileDropEvent`       |
+| `filedialogopen`      | the file dialog has been opened                                                                                          | `FileDropEvent`       |
+| `windowfiledragenter` | a dragenter event has occurred on the document (event is named windowfiledragenter so not to confuse document with file) | `FileDropDragEvent`   |
+| `windowfiledragleave` | a dragleave event has occurred on the document (event is named windowfiledragleave so not to confuse document with file) | `FileDropDragEvent`   |
+| `windowfiledragover`  | a dragover event has occurred on the document (event is named windowfiledragover so not to confuse document with file)   | `FileDropDragEvent`   |
 
 ### Errors
 
