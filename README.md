@@ -63,8 +63,6 @@ dropfile comes with both a component and an action. The component is basically a
 
 ## Notes
 
-This was my first svelte project so
-
 ### Previous art
 
 - [svelte-file-dropzone](https://github.com/thecodejack/svelte-file-dropzone).
