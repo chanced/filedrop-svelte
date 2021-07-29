@@ -1,5 +1,5 @@
-type EventList = import("$lib/event").Events;
-type FileDropEvent = import("$lib/event").FileDropEvent;
+type EventList = import("./lib/event").Events;
+type FileDropEvent = import("./lib/event").FileDropEvent;
 declare namespace svelte.JSX {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	type EventHandler<E = Event, T = HTMLElement> = (event: E & { target: EventTarget & T }) => any;

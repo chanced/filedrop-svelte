@@ -1,4 +1,4 @@
-import type { FileDropOptions } from "$lib";
+import type { FileDropOptions } from "./options";
 import { FileWithPath, fromEvent } from "file-selector";
 import { processFiles, Files, isFileWithPath } from "./file";
 
