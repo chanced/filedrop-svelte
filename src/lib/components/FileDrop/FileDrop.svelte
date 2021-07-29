@@ -1,7 +1,7 @@
 <script lang="ts">
 	import filedrop from "../../actions/filedrop";
 	import { fromEvent as filesFromEvent } from "file-selector";
-	import { onMount, onDestroy, createEventDispatcher } from "svelte";
+	import { createEventDispatcher } from "svelte";
 	import type { Events } from "../../event";
 	import type { FileDropOptions } from "../../options";
 	export let id: string = undefined;
@@ -78,6 +78,7 @@
 			outline: 1em solid #f0f0f0;
 			transition: border 0.3s ease-in-out;
 			outline-offset: -1.3em;
+			padding: 0.475em;
 		}
 		.filedrop:focus {
 			border-color: #2196f3;

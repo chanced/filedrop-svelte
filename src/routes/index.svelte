@@ -5,21 +5,44 @@
 	import FileDrop from "$lib/components/FileDrop";
 	import { element } from "svelte/internal";
 	let disabled = false;
-	let files: Files;
+	let actionFiles: Files;
+	let compFiles: Files;
 	let container: HTMLDivElement;
 </script>
 
 <h1>FileDrop Examples</h1>
 
 <h2>Component</h2>
-<FileDrop />
+<div class="container">
+	<FileDrop
+		on:filedrop={(ev) => {
+			compFiles = ev.detail.files;
+		}}
+	/>
+	{#if compFiles}
+		<h3>Accepted Files</h3>
+		<ul>
+			{#each compFiles?.accepted as file}
+				<li><span>{file.name}</span> - <em>{fileSize(file.size)}</em></li>
+			{/each}
+		</ul>
+		<h3>Rejected files</h3>
+		<ul>
+			{#each compFiles?.rejected as rejected}
+				<li>
+					<span>{rejected.file.name}</span> - {rejected.error.message}
+				</li>
+			{/each}
+		</ul>
+	{/if}
+</div>
 
 <h2>Action</h2>
 <div bind:this={container} class="container">
 	<div
 		use:filedrop={{ disabled }}
 		on:filedrop={(e) => {
-			files = e.detail.files;
+			actionFiles = e.detail.files;
 		}}
 		class="filedrop"
 	>
@@ -30,16 +53,16 @@
 		>
 		<p>Upload content (action)</p>
 	</div>
-	{#if files}
+	{#if actionFiles}
 		<h3>Accepted Files</h3>
 		<ul>
-			{#each files?.accepted as file}
+			{#each actionFiles?.accepted as file}
 				<li><span>{file.name}</span> - <em>{fileSize(file.size)}</em></li>
 			{/each}
 		</ul>
 		<h3>Rejected files</h3>
 		<ul>
-			{#each files?.rejected as rejected}
+			{#each actionFiles?.rejected as rejected}
 				<li>
 					<span>{rejected.file.name}</span> - {rejected.error.message}
 				</li>

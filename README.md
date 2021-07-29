@@ -74,8 +74,25 @@ dropfile comes with both a component and an action. The component is basically a
 | `multiple`      | sets the file input to `multiple`. See [HTML attribute: multiple on MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/multiple) for more information.                                                                            | `boolean`           | `true`      |
 | `disabled`      | disables the action/component, removing all event listeners                                                                                                                                                                                               | `boolean`           | `false`     |
 | `windowDrop`    | determines whether or not files can be dropped anywhere in the window. A value of `false` would require that the files be droppped within the `<FileDrop>` component or the element with `use:filedrop`.                                                  | `boolean`           | `true`      |
-| `clickToUpload` | causes the containing element to be treated as the input. Disabling this does not change the `tabindex` of the container or remove the `keydown` eventListener                                                                                            | `boolean`           | `true`      |
-| `input`         | allows you to explicitly pass the file `HTMLInputElement` as a parameter. If this `undefined`, the action will search for `input[type="file"]`. If one is not found, it will be appeneded to the element with `use:filedrop`                              | `HTMLInputElement`  | `undefined` |
+| `clickToUpload` | causes the containing element to be treated as the input. If hideInput is true or undefined, disabling this does not change the `tabindex` of the container or remove the `keydown` eventListener                                                         | `boolean`           | `true`      |
+| `tabIndex`      | tab index of the container. if `disabled` is `true` then this is set to `-1`. If `clickToUpload` is `true` or `undefined`, this defaults to 0.                                                                                                            | `number`            | `0`         |
+| `hideInput`     | if true or undefined, input[type='file'] will be set to display:none                                                                                                                                                                                      | `boolean`           | `true`      |
+| `input`         | allows you to explicitly pass a reference to the file `HTMLInputElement` as a parameter. If `undefined`, the action will search for `input[type="file"]`. If one is not found, it will be appeneded to the element with `use:filedrop`                    | `HTMLInputElement`  | `undefined` |
+
+### Events
+
+| event               | description                                                                                                              | `event.detail`        |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------- |
+| filedrop            | one or more files has been selected in the file dialog or drag-and-dropped                                               | `FileDropSelectEvent` |
+| filedragenter       | a dragenter event has occurred on the container element containnig one or more files                                     | `FileDropDragEvent`   |
+| filedragleave       | a dragleave event has occurred on the container element containing one or more files                                     | `FileDropDragEvent`   |
+| filedragover        | a dragover event has occurred on the container element containing one or more files                                      | `FileDropDragEvent`   |
+| filedialogcancel    | the file dialog has been canceled without selecting files                                                                | `FileDropEvent`       |
+| filedialogclose     | the file dialog has been closed with files selected                                                                      | `FileDropEvent`       |
+| filedialogopen      | the file dialog has been opened                                                                                          | `FileDropEvent`       |
+| windowfiledragenter | a dragenter event has occurred on the document (event is named windowfiledragenter so not to confuse document with file) | `FileDropDragEvent`   |
+| windowfiledragleave | a dragleave event has occurred on the document (event is named windowfiledragleave so not to confuse document with file) | `FileDropDragEvent`   |
+| windowfiledragover  | a dragover event has occurred on the document (event is named windowfiledragover so not to confuse document with file)   | `FileDropDragEvent`   |
 
 ### Errors
 
@@ -99,7 +116,6 @@ dropfile comes with both a component and an action. The component is basically a
 - [attr-accept](https://github.com/react-dropzone/attr-accept)
 - [file-selector](https://github.com/react-dropzone/file-selector)
 - [filesize](https://github.com/avoidwork/filesize.js)
-- [ua-parser-js](https://github.com/faisalman/ua-parser-js)
 
 ## Todo
 

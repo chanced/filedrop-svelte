@@ -1,3 +1,4 @@
+// Options for FileDrop component & action
 export interface FileDropOptions {
 	// specify file types to accept. See [HTML attribute: accept on MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept) for more information.
 	accept?: string | string[];
@@ -13,8 +14,12 @@ export interface FileDropOptions {
 	disabled?: boolean;
 	// determines whether or not files can be dropped anywhere in the window. A value of `false` would require that the files be droppped within the `<FileDrop>` component or the element with `use:filedrop`.
 	windowDrop?: boolean;
-	// causes the containing element to be treated as the input. Disabling this does not change the `tabindex` of the container or remove the `keydown` eventListener
+	// causes the containing element to be treated as the input. If hideInput is true or undefined, disabling this does not change the `tabindex` of the container or remove the `keydown` eventListener
 	clickToUpload?: boolean;
+
+	tabIndex?: number; // if clickToUpload is true or undefined, this defaults to 0.
+	// if true or undefined, input[type='file'] will be set to display:none
+	hideInput?: boolean;
 	// style applied to the node
 	style?: string;
 	// id of the node

@@ -21,15 +21,25 @@ export interface FileDropSelectEvent extends FileDropEvent {
 }
 
 export interface Events {
+	// one or more files has been selected in the file dialog or drag-and-dropped
 	filedrop: FileDropSelectEvent;
+	// a dragenter event has occurred on the container element containnig one or more files
 	filedragenter: FileDropDragEvent;
+	// a dragleave event has occurred on the container element containing one or more files
 	filedragleave: FileDropDragEvent;
+	// a dragover event has occurred on the container element containing one or more files
 	filedragover: FileDropDragEvent;
+	// the file dialog has been canceled without selecting files
 	filedialogcancel: FileDropEvent;
+	// the file dialog has been closed with files selected
 	filedialogclose: FileDropEvent;
+	// the file dialog has been opened
 	filedialogopen: FileDropEvent;
+	// a dragenter event has occurred on the document (event is named windowfiledragenter so not to confuse document with file)
 	windowfiledragenter: FileDropDragEvent;
+	// a dragleave event has occurred on the document (event is named windowfiledragleave so not to confuse document with file)
 	windowfiledragleave: FileDropDragEvent;
+	// a dragover event has occurred on the document (event is named windowfiledragover so not to confuse document with file)
 	windowfiledragover: FileDropDragEvent;
 }
 
