@@ -6,11 +6,6 @@ const config = {
 	// for more information about preprocessors
 	preprocess: preprocess(),
 	kit: {
-		
-		vite: {
-			resolve: {},
-
-		},
 		target: '#svelte'
 	}
 };
