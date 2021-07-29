@@ -1,4 +1,4 @@
-import type { FileDropOptions } from "./event";
+import type { FileDropOptions } from "./options";
 import doesAccept from "attr-accept";
 import {
 	FileCountExceededError,
@@ -9,9 +9,14 @@ import {
 } from "./errors";
 import type { FileWithPath } from "file-selector";
 
+export interface RejectedFile {
+	file: FileWithPath;
+	error: FileDropError;
+}
+
 export interface Files {
 	accepted: FileWithPath[];
-	errors: FileDropError[];
+	rejected: RejectedFile[];
 }
 
 type CheckParams = {
@@ -31,19 +36,18 @@ export function processFiles(files: FileWithPath[], options: FileDropOptions): F
 			let error = checkFile(file, options);
 			console.log("error", error);
 			if (error != undefined) {
-				accumulator.errors.push(error);
+				accumulator.rejected.push({ file, error });
+				return accumulator;
 			} else if (fileLimit > 0 && count > fileLimit) {
 				error = new FileCountExceededError(file, fileLimit);
+				accumulator.rejected.push({ file, error });
+				return accumulator;
 			}
-			if (error != undefined) {
-				accumulator.errors.push(error);
-			} else {
-				accumulator.accepted.push(file);
-				count = count + 1;
-			}
+			accumulator.accepted.push(file);
+			count = count + 1;
 			return accumulator;
 		},
-		{ accepted: [], errors: [] } as Files,
+		{ accepted: [], rejected: [] } as Files,
 	);
 }
 

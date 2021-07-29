@@ -4,141 +4,61 @@
 	import { onMount, onDestroy, createEventDispatcher } from "svelte";
 	import { isString, isArrayOfStrings } from "$lib/util";
 	import type { Events } from "$lib/event";
+	import type { FileDropOptions } from "$lib/options";
 	export let id: string = undefined;
 	export let disableStyles = false;
-	export let style: string = undefined;
-	export let tabIndex: number = 0;
+	export let style: string = $$props.style;
 	export let containerClass = $$props.class as string | undefined;
 	export let accept: string | string[] = undefined;
-	export let multiple: boolean = false;
-	export let disabled: boolean = false;
-
-	const dispatch = createEventDispatcher<Events>();
-	let container: HTMLDivElement;
-	let input: HTMLInputElement;
-
-	let isFocused = false;
-	let isDragAccept = false;
-	let isDragActive = false;
-	let isDragReject = false;
-	let isFileDialogActive = false;
-	let acceptTypes: string[] | undefined;
-
+	export let multiple: boolean = undefined;
+	export let disabled: boolean = undefined;
+	export let maxSize: number = undefined;
+	export let minSize: number = undefined;
+	export let fileLimit: number = undefined;
+	export let clickToUpload = true;
+	export let input: HTMLInputElement = undefined;
 	$: {
-		if (isString(accept)) {
-			acceptTypes = accept.split(",");
-		} else if (isArrayOfStrings(accept)) {
-			acceptTypes = accept;
-		} else {
-			acceptTypes = undefined;
-		}
+		let options: FileDropOptions = {
+			id,
+			style,
+			accept,
+			disabled,
+			clickToUpload,
+			maxSize,
+			minSize,
+			input,
+			fileLimit,
+			multiple,
+		};
 	}
+	$: isMulti = (fileLimit === undefined || fileLimit > 1) && (multiple === undefined || multiple);
+	const dispatch = createEventDispatcher<Events>();
 
-	function onInput(ev: InputEvent) {
-		// dispatch("dialogopen", baseEvent);
-		ev.stopPropagation();
-	}
-
-	export function setTabIndex(value: number): void {
-		tabIndex = value;
-	}
-	export function setMultiple(value: boolean): void {
-		multiple = value;
-	}
-	export function setStyle(value: string | undefined): void {
-		style = value;
-	}
-	export function setAccept(value: string | string[] | undefined): void {
-		if (value === null || value === undefined || value === "") {
-			accept = undefined;
-			return;
-		}
-		if (isString(value)) {
-			accept = value;
-			return;
-		}
-		if (isArrayOfStrings(value)) {
-			accept = value.join(" ");
-			return;
-		}
-		if (isString(value)) {
-			accept = value;
-			return;
-		}
-	}
-	export function disable(): void {
-		if (!disabled) {
-			disabled = true;
-		}
-	}
-
-	export function enable(): void {
-		if (disabled) {
-			disabled = false;
-		}
-	}
-
-	export function setContainerClass(value: string | string[] | null | undefined): void {
-		if (value === null || value === undefined) {
-			containerClass = undefined;
-			return;
-		}
-		if (isString(value)) {
-			containerClass = value;
-			return;
-		}
-		if (isArrayOfStrings(value)) {
-			containerClass = value.join(",");
-		}
-		if (isString(value)) {
-			containerClass = value;
-			return;
-		}
-		containerClass = value.toString();
+	function proxy<T extends keyof Events, D extends Events[T] = Events[T]>(type: T): ({ detail: D }) => void {
+		return function ({ detail }) {
+			dispatch(type, detail);
+		};
 	}
 </script>
 
-<!-- <div
-	bind:this={container}
-	class={containerClass}
-	{tabIndex}
-	{style}
-	on:keydown={handleKeyDown}
-	on:focus={handleFocus}
-	on:blur={handleBlur}
-	on:click={handleClick}
-	on:dragenter={handleDragEnter}
-	on:dragover={handleDragOver}
-	on:dragleave={handleDragLeave}
-	on:drop={handleDrop}
-> -->
-
 <div
-	use:filedrop
-	on:filedrop={(ev) => {
-		console.log(ev.detail.files);
-	}}
 	{id}
+	class:filedrop={!containerClass}
+	use:filedrop
+	on:filedrop={proxy("filedrop")}
+	on:filedialogcancel={proxy("filedialogcancel")}
+	on:filedialogclose={proxy("filedialogclose")}
+	on:filedialogopen={proxy("filedialogopen")}
+	on:filedragenter={proxy("filedragenter")}
+	on:filedragleave={proxy("filedragleave")}
+	on:filedragover={proxy("filedragover")}
+	on:windowfiledragenter={proxy("windowfiledragenter")}
+	on:windowfiledragleave={proxy("windowfiledragleave")}
+	on:windowfiledragover={proxy("windowfiledragover")}
 >
-	<input
-		accept={acceptTypes.join(",")}
-		{multiple}
-		type="file"
-		autocomplete="off"
-		tabindex="-1"
-		on:change={(onFileSelection) => {}}
-		on:click={(onInputClick) => {}}
-		bind:this={input}
-	/>
 	<input type="file" />
-
 	<slot>
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48"
-			><path fill="none" d="M0 0h24v24H0z" /><path
-				d="M1 14.5a6.496 6.496 0 0 1 3.064-5.519 8.001 8.001 0 0 1 15.872 0 6.5 6.5 0 0 1-2.936 12L7 21c-3.356-.274-6-3.078-6-6.5zm15.848 4.487a4.5 4.5 0 0 0 2.03-8.309l-.807-.503-.12-.942a6.001 6.001 0 0 0-11.903 0l-.12.942-.805.503a4.5 4.5 0 0 0 2.029 8.309l.173.013h9.35l.173-.013zM13 13v4h-2v-4H8l4-5 4 5h-3z"
-			/></svg
-		>
-		<p>Upload content</p>
+		<p>Drag &amp; drop or click to upload {isMulti ? "files" : "a file "}</p>
 	</slot>
 </div>
 {#if !!disableStyles && !containerClass}

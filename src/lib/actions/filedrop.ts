@@ -16,6 +16,7 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 		);
 	}
 	options = options || {};
+
 	let windowDrop = options.windowDrop === undefined || options.windowDrop;
 	let isFileDialogOpen = false;
 	let isDraggingFiles = false;
@@ -24,6 +25,10 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 	node.tabIndex = getTabIndex(node, input);
 	input.style.display = "none";
 	input.tabIndex = -1;
+
+	if (options.multiple) {
+		input.multiple = true;
+	}
 
 	let triggerEvent: Event;
 
@@ -208,9 +213,28 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 	}
 
 	function init(options: FileDropOptions) {
+		if (options.fileLimit === 1) {
+			options.multiple = false;
+		}
+
+		if (options.fileLimit == undefined || options.fileLimit > 1) {
+			options.multiple = true;
+		}
+		if ((options.multiple === undefined && options.fileLimit > 1) || options.fileLimit === undefined) {
+			options.multiple = true;
+		}
 		if (!options.disabled) {
 			windowDrop = options.windowDrop === undefined || options.windowDrop;
 			node.classList.remove("disabled");
+			input.multiple = options.multiple;
+			if (options.accept?.length) {
+				if (Array.isArray(options.accept)) {
+					input.accept = options.accept.join(",");
+				} else {
+					input.accept = options.accept;
+				}
+			}
+			input.autocomplete = "off";
 			node.addEventListener("keydown", handleKeyDown);
 			node.addEventListener("dragenter", handleDragEnter);
 			node.addEventListener("dragleave", handleDragLeave);
@@ -218,6 +242,7 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 			node.addEventListener("drop", handleDrop);
 			input.addEventListener("change", handleChange);
 			input.addEventListener("click", handleInputClick);
+
 			document.addEventListener("dragenter", handleDocumentDragEnter);
 			document.addEventListener("dragleave", handleDocumentDragLeave);
 			document.addEventListener("dragover", handleDocumentDragOver);
