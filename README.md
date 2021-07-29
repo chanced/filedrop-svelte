@@ -79,12 +79,12 @@ dropfile comes with both a component and an action. The component is basically a
 
 ### Errors
 
-| class                          | reason                                                        | code                                |
-| ------------------------------ | ------------------------------------------------------------- | ----------------------------------- |
-| `InvalidFileTypeError`         | file type does not satisfy `accept`                           | `InvalidFileType` (**0**)           |
-| `FileCountExceededError`       | total number of files selected or dropped exceeds `fileLimit` | `FileCountExceeded` (**1**)         |
-| `FileSizeMinimumNotMetError`   | file does not satisify `minSize`                              | `FileSizeMinimumNotMet` (**2**)     |
-| `FileSizeMaximumExceededError` | file does not satisify `maxSize`                              | `FileSizeMaximumExceeded` - (**3**) |
+| class                          | reason                                                        | code                              |
+| ------------------------------ | ------------------------------------------------------------- | --------------------------------- |
+| `InvalidFileTypeError`         | file type does not satisfy `accept`                           | `InvalidFileType` (**0**)         |
+| `FileCountExceededError`       | total number of files selected or dropped exceeds `fileLimit` | `FileCountExceeded` (**1**)       |
+| `FileSizeMinimumNotMetError`   | file does not satisify `minSize`                              | `FileSizeMinimumNotMet` (**2**)   |
+| `FileSizeMaximumExceededError` | file does not satisify `maxSize`                              | `FileSizeMaximumExceeded` (**3**) |
 
 ### Alternatives
 
