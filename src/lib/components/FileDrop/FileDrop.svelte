@@ -61,7 +61,7 @@
 		<p>Drag &amp; drop or click to upload {isMulti ? "files" : "a file "}</p>
 	</slot>
 </div>
-{#if !!disableStyles && !containerClass}
+{#if !disableStyles && !containerClass}
 	<style>
 		.filedrop {
 			background-color: #f0f0f0;

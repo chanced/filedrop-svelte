@@ -54,20 +54,4 @@
 	.container {
 		width: 300px;
 	}
-	.filedrop {
-		background-color: #c3c3c3;
-		min-height: 100px;
-		display: flex;
-		flex-direction: column;
-		align-content: center;
-		justify-content: center;
-		align-items: center;
-	}
-	.filedrop input {
-		display: none;
-	}
-	:global(.filedrop.disabled) {
-		background-color: #f0f0f0 !important;
-		color: #d3d3d3 !important;
-	}
 </style>
