@@ -1,9 +1,8 @@
-import { browser } from "$app/env";
-import type { Events } from "$lib/event";
-import { getFilesFromEvent, extractFilesFromEvent, isEventWithFiles, isNode } from "$lib/event";
-import type { FileDropOptions } from "$lib/options";
+import type { Events } from "../event";
+import { getFilesFromEvent, extractFilesFromEvent, isEventWithFiles, isNode } from "../event";
+import type { FileDropOptions } from "../options";
+import { userAgent } from "../useragent";
 
-import useragent from "$lib/useragent";
 type Action = {
 	destroy(): void;
 	update(options?: FileDropOptions);
@@ -66,7 +65,7 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 	}
 
 	function openDialog() {
-		if (useragent.isIE() || useragent.isLegacyEdge()) {
+		if (userAgent.isIE() || userAgent.isLegacyEdge()) {
 			setTimeout(input.click, 1);
 		} else {
 			input.click();
@@ -277,7 +276,7 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 			} else {
 				node.removeEventListener("click", handleClick);
 			}
-			if (browser) {
+			if (!userAgent.isServer()) {
 				window.addEventListener("focus", handleWindowFocus);
 			}
 		} else {
@@ -295,7 +294,7 @@ export const filedrop = function (node: HTMLElement, options?: FileDropOptions):
 		input.removeEventListener("change", handleChange);
 		input.removeEventListener("click", handleInputClick);
 		input.files = null;
-		if (browser) {
+		if (!userAgent.isServer()) {
 			document.removeEventListener("dragover", handleDocumentDragOver);
 			document.removeEventListener("dragenter", handleDocumentDragEnter);
 			document.removeEventListener("dragleave", handleDocumentDragLeave);

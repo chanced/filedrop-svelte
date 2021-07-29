@@ -1,10 +1,9 @@
 <script lang="ts">
-	import filedrop from "$lib/actions/filedrop";
+	import filedrop from "../../actions/filedrop";
 	import { fromEvent as filesFromEvent } from "file-selector";
 	import { onMount, onDestroy, createEventDispatcher } from "svelte";
-	import { isString, isArrayOfStrings } from "$lib/util";
-	import type { Events } from "$lib/event";
-	import type { FileDropOptions } from "$lib/options";
+	import type { Events } from "../../event";
+	import type { FileDropOptions } from "../../options";
 	export let id: string = undefined;
 	export let disableStyles = false;
 	export let style: string = $$props.style;

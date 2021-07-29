@@ -177,4 +177,6 @@ export function parse(useragent?: string): UserAgent {
 	return new UserAgent(parser.getResult());
 }
 
-export default parse();
+export const userAgent = parse();
+
+export default userAgent;
