@@ -3,7 +3,6 @@
 	import type { Files } from "$lib";
 	import fileSize from "filesize";
 	import FileDrop from "$lib/components/FileDrop";
-	import { element } from "svelte/internal";
 	let disabled = false;
 	let actionFiles: Files;
 	let compFiles: Files;
@@ -11,7 +10,6 @@
 </script>
 
 <h1>FileDrop Examples</h1>
-
 <h2>Component</h2>
 <div class="container">
 	<FileDrop

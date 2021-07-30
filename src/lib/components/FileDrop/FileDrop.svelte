@@ -5,7 +5,6 @@
 	import type { Events } from "../../event";
 	import type { FileDropOptions } from "../../options";
 	export let id: string = undefined;
-	export let disableStyles = false;
 	export let style: string = $$props.style;
 	export let containerClass = $$props.class as string | undefined;
 	export let accept: string | string[] = undefined;
