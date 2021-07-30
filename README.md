@@ -113,6 +113,7 @@ See this [REPL for minimal usage](https://svelte.dev/repl/645841f327b8484093f94b
 
 ### Previous art
 
+- [react-dropzone](https://github.com/react-dropzone/react-dropzone)
 - [svelte-file-dropzone](https://github.com/thecodejack/svelte-file-dropzone)
 
 ### Dependencies
