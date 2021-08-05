@@ -12,7 +12,7 @@ npm i filedrop-svelte -D
 
 ## Usage
 
-dropfile comes with both a component and an action. The component is basically a wrapper around the action with some some default styling.
+filedrop-svelte comes with both a component and an action. The component is basically a wrapper around the action with some some default styling.
 
 ### Component
 
