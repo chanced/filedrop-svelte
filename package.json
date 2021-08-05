@@ -1,6 +1,6 @@
 {
 	"name": "filedrop-svelte",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"author": {
 		"name": "chance dinkins",
 		"email": "chanceusc@gmail.com"
@@ -13,9 +13,10 @@
 	"keywords": [
 		"svelte",
 		"sveltekit",
-		"typescript",
 		"dropzone",
-		"drag and drop"
+		"drag and drop",
+		"file upload",
+		"drag-and-drop"
 	],
 	"description": "svelte component and action to create drag-and-drop file dropzones.",
 	"scripts": {

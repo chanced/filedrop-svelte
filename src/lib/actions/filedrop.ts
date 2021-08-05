@@ -330,7 +330,6 @@ export const filedrop = function (node: HTMLElement, opts?: FileDropOptions): Ac
 
 	function init(opts: FileDropOptions) {
 		options = configOptions(node, opts);
-		console.log(options);
 		input = options.input;
 		node.tabIndex = options.tabIndex;
 
