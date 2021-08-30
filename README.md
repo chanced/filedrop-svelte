@@ -124,7 +124,7 @@ See this [REPL for minimal usage](https://svelte.dev/repl/645841f327b8484093f94b
 
 ## Issues
 
-- Typing / intelisense for events on the FileDrop component are not registering properly. The [override](https://github.com/chanced/filedrop-svelte/blob/main/src/types.d.ts) (shamelessly replicated from [this](https://github.com/bluwy/pick-palette/blob/c3733e6a0e1bda0a1a2c1dae4700bd9753e6b284/src/global.d.ts)) work for the action though.
+- Typing / intelisense for events on the FileDrop component are not registering properly. The [override](https://github.com/chanced/filedrop-svelte/blob/main/src/types.d.ts) work for the action though.
 
 ## Todo
 
