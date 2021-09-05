@@ -7,7 +7,15 @@ import {
 	FileSizeMinimumNotMetError,
 	InvalidFileTypeError,
 } from "./errors";
+
 import type { FileWithPath } from "file-selector";
+
+declare module "file-selector" {
+	interface FileWithPath extends Blob {
+		readonly path?: string;
+		readonly webkitRelativePath: string;
+	}
+}
 
 export interface RejectedFile {
 	file: FileWithPath;
@@ -27,7 +35,8 @@ type CheckParams = {
 
 export function processFiles(files: FileWithPath[], options: FileDropOptions): Files {
 	let { fileLimit } = options;
-	if (options.multiple) {
+
+	if (options.multiple != undefined && !options.multiple) {
 		fileLimit = 1;
 	}
 	let count = 0;
@@ -37,7 +46,7 @@ export function processFiles(files: FileWithPath[], options: FileDropOptions): F
 			if (error != undefined) {
 				accumulator.rejected.push({ file, error });
 				return accumulator;
-			} else if (fileLimit > 0 && count > fileLimit) {
+			} else if (fileLimit > 0 && count >= fileLimit) {
 				error = new FileCountExceededError(file, fileLimit);
 				accumulator.rejected.push({ file, error });
 				return accumulator;
@@ -50,7 +59,7 @@ export function processFiles(files: FileWithPath[], options: FileDropOptions): F
 	);
 }
 
-export function checkFile(file: File, params: CheckParams): FileDropError | undefined {
+export function checkFile(file: FileWithPath, params: CheckParams): FileDropError | undefined {
 	const { accept, minSize: min, maxSize: max } = params;
 	return checkFileType(file, accept) || checkFileSize(file, { min, max });
 }
