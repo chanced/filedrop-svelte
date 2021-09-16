@@ -5,8 +5,6 @@
     import type { Events } from "../../event";
     import type { FileDropOptions } from "../../options";
     export let id: string = undefined;
-    export let style: string = $$props.style;
-    export let containerClass = $$props.class as string | undefined;
     export let accept: string | string[] = undefined;
     export let multiple: boolean = undefined;
     export let disabled: boolean = undefined;
@@ -19,7 +17,6 @@
     $: {
         options = {
             id,
-            style,
             accept,
             disabled,
             clickToUpload,
@@ -40,13 +37,11 @@
             dispatch(type, ev.detail);
         };
     }
-
     $: isMulti = (fileLimit === undefined || fileLimit > 1) && (multiple === undefined || multiple);
 </script>
 
 <label
     {id}
-    class:filedrop={!containerClass}
     use:filedrop={options}
     on:filedrop={proxy("filedrop")}
     on:filedialogcancel={proxy("filedialogcancel")}
@@ -58,15 +53,18 @@
     on:windowfiledragenter={proxy("windowfiledragenter")}
     on:windowfiledragleave={proxy("windowfiledragleave")}
     on:windowfiledragover={proxy("windowfiledragover")}
+    on:dragenter
+    on:dragleave
+    on:dragover
 >
-    <input type="file" />
     <slot>
-        <p>Drag &amp; drop or select to upload {isMulti ? "files" : "a file "}</p>
+        <p><span>Drag &amp; drop or select to upload {isMulti ? "files" : "a file "}</span></p>
     </slot>
+    <input type="file" />
 </label>
 
 <style>
-    .filedrop {
+    p {
         background-color: #f0f0f0;
         display: flex;
         flex-direction: column;
@@ -79,22 +77,22 @@
         outline-offset: -1.3em;
         padding: 0.475em;
     }
-    .filedrop:focus {
+    p:focus {
         border-color: #2196f3;
     }
-    .filedrop:hover {
+    p:hover {
         border-color: #343434;
     }
-    .filedrop p {
+    p span {
         transition: color 0.1s;
         transition: fill 0.1s;
     }
-    .filedrop:focus p {
+    p:focus span {
         color: #2196f3;
         fill: #2196f3;
     }
-    .filedrop:hover p,
-    p {
+    p:hover span,
+    p span {
         color: #373737;
         font-size: 1.2em;
         cursor: default;

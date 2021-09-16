@@ -185,6 +185,7 @@ export const filedrop = function (node: HTMLElement, opts?: FileDropOptions): Ac
         if (isNode(ev.target) && input.isEqualNode(ev.target)) {
             return;
         }
+        ev.preventDefault();
         triggerEvent = ev;
         openDialog();
     }
