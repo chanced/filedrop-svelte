@@ -44,7 +44,7 @@
 	$: isMulti = (fileLimit === undefined || fileLimit > 1) && (multiple === undefined || multiple);
 </script>
 
-<div
+<label
 	{id}
 	class:filedrop={!containerClass}
 	use:filedrop={options}
@@ -63,12 +63,11 @@
 	<slot>
 		<p>Drag &amp; drop or select to upload {isMulti ? "files" : "a file "}</p>
 	</slot>
-</div>
+</label>
 
 <style>
 	.filedrop {
 		background-color: #f0f0f0;
-		height: 200px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

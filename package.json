@@ -1,14 +1,21 @@
 {
 	"name": "filedrop-svelte",
-	"version": "0.0.10",
+	"description": "svelte component and action to create drag-and-drop file dropzones.",
+	"version": "0.0.11",
+	"license": "MIT",
 	"author": {
 		"name": "chance dinkins",
 		"email": "chanceusc@gmail.com"
 	},
-	"license": "mit",
+	"contributors": [
+		"not_existing"
+	],
 	"repository": {
 		"url": "https://github.com/chanced/filedrop-svelte",
 		"type": "git"
+	},
+	"bugs": {
+		"url": "https://github.com/chanced/filedrop-svelte/issues"
 	},
 	"keywords": [
 		"svelte",
@@ -18,7 +25,7 @@
 		"file upload",
 		"drag-and-drop"
 	],
-	"description": "svelte component and action to create drag-and-drop file dropzones.",
+	"type": "module",
 	"scripts": {
 		"package": "svelte-kit package",
 		"dev": "svelte-kit dev",
@@ -26,9 +33,14 @@
 		"preview": "svelte-kit preview",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --check∆ --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+		"lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
 		"format": "prettier --write --plugin-search-dir=. .",
 		"test": "playwright test"
+	},
+	"dependencies": {
+		"file-selector": "^0.2.4",
+		"filesize": "^7.0.0",
+		"attr-accept": "^2.2.2"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.13.0",
@@ -48,11 +60,5 @@
 		"ts-node": "^10.1.0",
 		"tslib": "^2.0.0",
 		"typescript": "^4.0.0"
-	},
-	"dependencies": {
-		"file-selector": "^0.2.4",
-		"filesize": "^7.0.0",
-		"attr-accept": "^2.2.2"
-	},
-	"type": "module"
+	}
 }
