@@ -68,7 +68,6 @@
 <style>
 	.filedrop {
 		background-color: #f0f0f0;
-		height: 200px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
