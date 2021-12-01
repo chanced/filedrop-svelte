@@ -1,64 +1,60 @@
 {
-	"name": "filedrop-svelte",
-	"description": "svelte component and action to create drag-and-drop file dropzones.",
-	"version": "0.0.11",
-	"license": "MIT",
-	"author": {
-		"name": "chance dinkins",
-		"email": "chanceusc@gmail.com"
-	},
-	"contributors": [
-		"not_existing"
-	],
-	"repository": {
-		"url": "https://github.com/chanced/filedrop-svelte",
-		"type": "git"
-	},
-	"bugs": {
-		"url": "https://github.com/chanced/filedrop-svelte/issues"
-	},
-	"keywords": [
-		"svelte",
-		"sveltekit",
-		"dropzone",
-		"drag and drop",
-		"file upload",
-		"drag-and-drop"
-	],
-	"type": "module",
-	"scripts": {
-		"package": "svelte-kit package",
-		"dev": "svelte-kit dev",
-		"build": "svelte-kit build",
-		"preview": "svelte-kit preview",
-		"check": "svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-		"format": "prettier --write --plugin-search-dir=. .",
-		"test": "playwright test"
-	},
-	"dependencies": {
-		"file-selector": "^0.2.4",
-		"filesize": "^8.0.3",
-		"attr-accept": "^2.2.2"
-	},
-	"devDependencies": {
-		"@playwright/test": "^1.14.1",
-		"@sveltejs/kit": "next",
-		"@typescript-eslint/eslint-plugin": "^4.31.1",
-		"@typescript-eslint/parser": "^4.31.1",
-		"eslint": "^7.32.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-svelte3": "^3.2.1",
-		"playwright": "^1.14.1",
-		"prettier": "~2.4.1",
-		"prettier-plugin-svelte": "^2.4.0",
-		"svelte": "^3.42.6",
-		"svelte-check": "^2.2.6",
-		"svelte-preprocess": "^4.9.4",
-		"svelte2tsx": "^0.4.6",
-		"ts-node": "^10.2.1",
-		"tslib": "^2.3.1",
-		"typescript": "^4.4.3"
-	}
+    "name": "filedrop-svelte",
+    "description": "svelte component and action to create drag-and-drop file dropzones.",
+    "version": "0.0.13",
+    "license": "MIT",
+    "author": {
+        "name": "chance dinkins",
+        "email": "chanceusc@gmail.com"
+    },
+    "contributors": [
+        "not_existing"
+    ],
+    "repository": {
+        "url": "https://github.com/chanced/filedrop-svelte",
+        "type": "git"
+    },
+    "bugs": {
+        "url": "https://github.com/chanced/filedrop-svelte/issues"
+    },
+    "keywords": [
+        "svelte",
+        "sveltekit",
+        "dropzone",
+        "drag and drop",
+        "file upload",
+        "drag-and-drop"
+    ],
+    "type": "module",
+    "scripts": {
+        "package": "svelte-kit package",
+        "dev": "svelte-kit dev",
+        "build": "svelte-kit build",
+        "preview": "svelte-kit preview",
+        "check": "svelte-check --tsconfig ./tsconfig.json",
+        "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+        "lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+        "format": "prettier --write --plugin-search-dir=. .",
+        "test": "playwright test"
+    },
+    "devDependencies": {
+        "file-selector": "^0.2.4",
+        "@playwright/test": "^1.17.0",
+        "@sveltejs/kit": "next",
+        "@typescript-eslint/eslint-plugin": "^5.5.0",
+        "@typescript-eslint/parser": "^5.5.0",
+        "eslint": "^8.3.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-svelte3": "^3.2.1",
+        "playwright": "^1.17.0",
+        "prettier": "~2.5.0",
+        "prettier-plugin-svelte": "^2.5.0",
+        "svelte": "^3.44.2",
+        "svelte-check": "^2.2.10",
+        "svelte-preprocess": "^4.9.8",
+        "svelte2tsx": "^0.4.10",
+        "ts-node": "^10.4.0",
+        "tslib": "^2.3.1",
+        "typescript": "^4.5.2"
+    }
 }

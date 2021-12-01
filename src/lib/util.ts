@@ -1,5 +1,4 @@
 import type { FileWithPath } from "file-selector";
-import { fromEvent } from "file-selector";
 
 export function isDataTransferItem(f: FileWithPath | DataTransferItem): f is DataTransferItem {
     return f && "getAsFile" in f;

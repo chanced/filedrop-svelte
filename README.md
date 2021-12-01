@@ -109,28 +109,57 @@ See this [REPL for minimal usage](https://svelte.dev/repl/645841f327b8484093f94b
 
 ### Alternatives
 
-- [svelte-file-dropzone](https://github.com/thecodejack/svelte-file-dropzone)
+-   [svelte-file-dropzone](https://github.com/thecodejack/svelte-file-dropzone)
 
 ### Previous art
 
-- [react-dropzone](https://github.com/react-dropzone/react-dropzone)
-- [svelte-file-dropzone](https://github.com/thecodejack/svelte-file-dropzone)
+-   [react-dropzone](https://github.com/react-dropzone/react-dropzone)
+-   [svelte-file-dropzone](https://github.com/thecodejack/svelte-file-dropzone)
 
 ### Dependencies
 
-- [attr-accept](https://github.com/react-dropzone/attr-accept)
-- [file-selector](https://github.com/react-dropzone/file-selector)
-- [filesize](https://github.com/avoidwork/filesize.js)
+-   [file-selector](https://github.com/react-dropzone/file-selector)
 
-## Issues
+## Typescript
 
-- Typing / intelisense for events on the FileDrop component are not registering properly. The [override](https://github.com/chanced/filedrop-svelte/blob/main/src/types.d.ts) work for the action though.
+In order for typings to work properly, you'll need to add the following to
+`global.d.ts` [until this issue is
+resolved](https://github.com/sveltejs/language-tools/issues/431):
+
+```typescript
+declare type FileDropEvent = import("./lib/event").FileDropEvent;
+declare type FileDropSelectEvent = import("./lib/event").FileDropSelectEvent;
+declare type FileDropDragEvent = import("./lib/event").FileDropDragEvent;
+declare namespace svelte.JSX {
+    interface HTMLAttributes<T> {
+        onfiledrop?: (event: CustomEvent<FileDropSelectEvent> & { target: EventTarget & T }) => void;
+        ononfiledrop?: (event: CustomEvent<FileDropSelectEvent> & { target: EventTarget & T }) => void;
+        ononfiledragenter?: (event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T }) => void;
+        ononfiledragleave?: (event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T }) => void;
+        ononfiledragover?: (event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T }) => void;
+        ononfiledialogcancel?: (event: CustomEvent<FileDropEvent> & { target: EventTarget & T }) => void;
+        ononfiledialogclose?: (event: CustomEvent<FileDropEvent> & { target: EventTarget & T }) => void;
+        ononfiledialogopen?: (event: CustomEvent<FileDropEvent> & { target: EventTarget & T }) => void;
+        ononwindowfiledragenter?: (
+            event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T },
+        ) => void;
+        ononwindowfiledragleave?: (
+            event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T },
+        ) => void;
+        ononwindowfiledragover?: (
+            event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T },
+        ) => void;
+    }
+}
+```
+
+You may need to edit `tsconfig.json` to include `global.d.ts` if it isn't already.
 
 ## Todo
 
-- tests
-- better documentation
-- demo website
+-   tests
+-   better documentation
+-   demo website
 
 ## License
 

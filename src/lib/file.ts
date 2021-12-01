@@ -1,5 +1,5 @@
-import type { FileDropOptions } from "./options";
-import doesAccept from "attr-accept";
+import type { FileWithPath } from "file-selector";
+import doesAccept from "./attr-accept";
 import {
     FileCountExceededError,
     FileDropError,
@@ -7,8 +7,7 @@ import {
     FileSizeMinimumNotMetError,
     InvalidFileTypeError,
 } from "./errors";
-
-import type { FileWithPath } from "file-selector";
+import type { FileDropOptions } from "./options";
 
 declare module "file-selector" {
     interface FileWithPath extends Blob {

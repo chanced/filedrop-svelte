@@ -1,5 +1,3 @@
-import fileSize from "filesize";
-
 export enum ErrorCode {
     InvalidFileType,
     FileSizeMaximumExceeded,
@@ -46,16 +44,13 @@ export class FileSizeMinimumNotMetError extends FileDropError {
     readableMinimum: string;
     readableSize: string;
     constructor(file: FileWithPath, minimum: number, message?: string) {
-        const readableSize = fileSize(file.size);
-        const readableMinimum = fileSize(minimum);
+
         message =
             message ??
-            `$file size ${readableSize} does not meet the file size minimum of ${readableMinimum}.`;
+            `$file size ${file.size} does not meet the file size minimum of ${minimum}.`;
         super(ErrorCode.FileSizeMinimumNotMet, file, message);
 
         this.minimum = minimum;
-        this.readableMinimum = readableMinimum;
-        this.readableSize = readableSize;
     }
 }
 export class FileSizeLimitExceededError extends FileDropError {
@@ -63,13 +58,8 @@ export class FileSizeLimitExceededError extends FileDropError {
     readableLimit: string;
     readableSize: string;
     constructor(file: File, limit: number, message?: string) {
-        const readableSize = fileSize(file.size);
-        const readableLimit = fileSize(limit);
-        message = message ?? `file size ${readableSize} exceeds file size limit of ${readableLimit}.`;
-
+        message = message ?? `file size ${file.size} exceeds file size limit of ${limit}.`;
         super(ErrorCode.FileSizeMinimumNotMet, file, message);
-        this.readableLimit = readableLimit;
-        this.readableSize = readableSize;
     }
 }
 export class FileCountExceededError extends FileDropError {
