@@ -107,20 +107,7 @@ See this [REPL for minimal usage](https://svelte.dev/repl/645841f327b8484093f94b
 | `FileSizeMinimumNotMetError`   | file does not satisify `minSize`                              | `FileSizeMinimumNotMet` (**2**)   |
 | `FileSizeMaximumExceededError` | file does not satisify `maxSize`                              | `FileSizeMaximumExceeded` (**3**) |
 
-### Alternatives
-
--   [svelte-file-dropzone](https://github.com/thecodejack/svelte-file-dropzone)
-
-### Previous art
-
--   [react-dropzone](https://github.com/react-dropzone/react-dropzone)
--   [svelte-file-dropzone](https://github.com/thecodejack/svelte-file-dropzone)
-
-### Dependencies
-
--   [file-selector](https://github.com/react-dropzone/file-selector)
-
-## Typescript
+### Typescript
 
 In order for typings to work properly, you'll need to add the following to
 `global.d.ts` [until this issue is
@@ -154,6 +141,21 @@ declare namespace svelte.JSX {
 ```
 
 You may need to edit `tsconfig.json` to include `global.d.ts` if it isn't already.
+
+
+### Alternatives
+
+-   [svelte-file-dropzone](https://github.com/thecodejack/svelte-file-dropzone)
+
+### Previous art
+
+-   [react-dropzone](https://github.com/react-dropzone/react-dropzone)
+-   [svelte-file-dropzone](https://github.com/thecodejack/svelte-file-dropzone)
+
+### Dependencies
+
+-   [file-selector](https://github.com/react-dropzone/file-selector)
+
 
 ## Todo
 
