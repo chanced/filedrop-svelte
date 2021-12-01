@@ -1,7 +1,7 @@
 {
     "name": "filedrop-svelte",
     "description": "svelte component and action to create drag-and-drop file dropzones.",
-    "version": "0.0.13",
+    "version": "0.0.14",
     "license": "MIT",
     "author": {
         "name": "chance dinkins",
@@ -37,8 +37,10 @@
         "format": "prettier --write --plugin-search-dir=. .",
         "test": "playwright test"
     },
+    "dependencies": {
+        "file-selector": "^0.2.4"
+    },
     "devDependencies": {
-        "file-selector": "^0.2.4",
         "@playwright/test": "^1.17.0",
         "@sveltejs/kit": "next",
         "@typescript-eslint/eslint-plugin": "^5.5.0",
