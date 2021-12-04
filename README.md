@@ -127,9 +127,9 @@ In order for typings to work properly, you'll need to add the following to
 resolved](https://github.com/sveltejs/language-tools/issues/431):
 
 ```typescript
-declare type FileDropEvent = import("./lib/event").FileDropEvent;
-declare type FileDropSelectEvent = import("./lib/event").FileDropSelectEvent;
-declare type FileDropDragEvent = import("./lib/event").FileDropDragEvent;
+declare type FileDropEvent = import("filedrop-svelte/lib/event").FileDropEvent;
+declare type FileDropSelectEvent = import("filedrop-svelte/lib/event").FileDropSelectEvent;
+declare type FileDropDragEvent = import("filedrop-svelte/lib/event").FileDropDragEvent;
 declare namespace svelte.JSX {
     interface HTMLAttributes<T> {
         onfiledrop?: (event: CustomEvent<FileDropSelectEvent> & { target: EventTarget & T }) => void;
