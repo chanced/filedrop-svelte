@@ -1,7 +1,6 @@
 <script lang="ts">
-    import filedrop from "../../actions/filedrop";
-    import { fromEvent as filesFromEvent } from "file-selector";
     import { createEventDispatcher } from "svelte";
+    import filedrop from "../../actions/filedrop";
     import type { Events } from "../../event";
     import type { FileDropOptions } from "../../options";
     export let id: string = undefined;

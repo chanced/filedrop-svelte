@@ -6,21 +6,15 @@ declare namespace svelte.JSX {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface HTMLAttributes<T> {
         onfiledrop?: (event: CustomEvent<FileDropSelectEvent> & { target: EventTarget & T }) => void;
-        ononfiledrop?: (event: CustomEvent<FileDropSelectEvent> & { target: EventTarget & T }) => void;
-        ononfiledragenter?: (event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T }) => void;
-        ononfiledragleave?: (event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T }) => void;
-        ononfiledragover?: (event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T }) => void;
-        ononfiledialogcancel?: (event: CustomEvent<FileDropEvent> & { target: EventTarget & T }) => void;
-        ononfiledialogclose?: (event: CustomEvent<FileDropEvent> & { target: EventTarget & T }) => void;
-        ononfiledialogopen?: (event: CustomEvent<FileDropEvent> & { target: EventTarget & T }) => void;
-        ononwindowfiledragenter?: (
-            event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T },
-        ) => void;
-        ononwindowfiledragleave?: (
-            event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T },
-        ) => void;
-        ononwindowfiledragover?: (
-            event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T },
-        ) => void;
+        onfiledrop?: (event: CustomEvent<FileDropSelectEvent> & { target: EventTarget & T }) => void;
+        onfiledragenter?: (event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T }) => void;
+        onfiledragleave?: (event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T }) => void;
+        onfiledragover?: (event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T }) => void;
+        onfiledialogcancel?: (event: CustomEvent<FileDropEvent> & { target: EventTarget & T }) => void;
+        onfiledialogclose?: (event: CustomEvent<FileDropEvent> & { target: EventTarget & T }) => void;
+        onfiledialogopen?: (event: CustomEvent<FileDropEvent> & { target: EventTarget & T }) => void;
+        onwindowfiledragenter?: (event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T }) => void;
+        onwindowfiledragleave?: (event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T }) => void;
+        onwindowfiledragover?: (event: CustomEvent<FileDropDragEvent> & { target: EventTarget & T }) => void;
     }
 }
