@@ -13,7 +13,7 @@ export const errorCodeNames = {
 };
 
 import type { FileWithPath } from "file-selector";
-
+import prettyBytes from "pretty-bytes";
 export class FileDropError extends Error {
     code: ErrorCode;
     message: string;
@@ -44,7 +44,9 @@ export class FileSizeMinimumNotMetError extends FileDropError {
     readableMinimum: string;
     readableSize: string;
     constructor(file: FileWithPath, minimum: number, message?: string) {
-        message = message ?? `$file size ${file.size} does not meet the file size minimum of ${minimum}.`;
+        message =
+            message ??
+            `$file size (${prettyBytes(file.size)}) does not meet the minimum of ${prettyBytes(minimum)}.`;
         super(ErrorCode.FileSizeMinimumNotMet, file, message);
 
         this.minimum = minimum;
@@ -55,7 +57,8 @@ export class FileSizeLimitExceededError extends FileDropError {
     readableLimit: string;
     readableSize: string;
     constructor(file: File, limit: number, message?: string) {
-        message = message ?? `file size ${file.size} exceeds file size limit of ${limit}.`;
+        message =
+            message ?? `file size (${prettyBytes(file.size)}) exceeds maximum of ${prettyBytes(limit)}.`;
         super(ErrorCode.FileSizeMaximumExceeded, file, message);
     }
 }

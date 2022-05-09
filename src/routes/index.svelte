@@ -1,11 +1,14 @@
 <script lang="ts">
     import type { Files } from "$lib";
-    import filedrop from "$lib/actions/filedrop";
-    import FileDrop from "$lib/components/FileDrop";
+    import FileDrop, { filedrop } from "$lib";
     let disabled = false;
     let actionFiles: Files;
     let compFiles: Files;
     let container: HTMLDivElement;
+
+    let fileLimit = null;
+    let maxSize = null;
+    let minSize = null;
 </script>
 
 <h1>FileDrop Examples</h1>
@@ -15,6 +18,9 @@
         on:filedrop={(ev) => {
             compFiles = ev.detail.files;
         }}
+        {fileLimit}
+        {maxSize}
+        {minSize}
     />
     {#if compFiles}
         <h3>Accepted Files</h3>
@@ -34,10 +40,9 @@
     {/if}
 </div>
 
-<h2>Action</h2>
 <div bind:this={container} class="container">
     <div
-        use:filedrop={{ disabled }}
+        use:filedrop={{ disabled, fileLimit, maxSize, minSize }}
         on:filedrop={(e) => {
             actionFiles = e.detail.files;
         }}
@@ -67,7 +72,23 @@
         </ul>
     {/if}
 </div>
-<label><input type="checkbox" bind:checked={disabled} />Disabled</label>
+
+<div><label><input type="checkbox" bind:checked={disabled} />Disabled</label></div>
+
+<form on:submit={(ev) => ev.preventDefault()} class="settings">
+    <label
+        >File Limit
+        <input type="number" bind:value={fileLimit} />
+    </label>
+    <label
+        >Max Size
+        <input type="number" bind:value={maxSize} />
+    </label>
+    <label
+        >Min Size
+        <input type="number" bind:value={minSize} />
+    </label>
+</form>
 
 <style>
     .container {

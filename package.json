@@ -38,7 +38,8 @@
         "test": "playwright test"
     },
     "dependencies": {
-        "file-selector": "^0.2.4"
+        "file-selector": "^0.2.4",
+        "pretty-bytes": "^6.0.0"
     },
     "devDependencies": {
         "@playwright/test": "^1.17.1",

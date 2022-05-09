@@ -1,5 +1,5 @@
 import type { Events, FileDropOptions } from "..";
-import { getFilesFromEvent, extractFilesFromEvent, isEventWithFiles, isNode } from "../event";
+import { extractFilesFromEvent, getFilesFromEvent, isEventWithFiles, isNode } from "../event";
 import { isBrowser } from "../util";
 
 type Action = {
@@ -111,9 +111,7 @@ function getInputElement(node: HTMLElement, { input }: FileDropOptions): HTMLInp
 
 export const filedrop = function (node: HTMLElement, opts?: FileDropOptions): Action {
     function dispatch<K extends keyof Events, T extends Events[K] = Events[K]>(typ: K, detail: T): void {
-        node.dispatchEvent(
-            new CustomEvent<T>(typ, { detail }),
-        );
+        node.dispatchEvent(new CustomEvent<T>(typ, { detail }));
     }
 
     let input: HTMLInputElement;
