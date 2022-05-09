@@ -1,7 +1,7 @@
 {
     "name": "filedrop-svelte",
     "description": "svelte component and action to create drag-and-drop file dropzones.",
-    "version": "0.1.0",
+    "version": "0.1.2",
     "license": "MIT",
     "author": {
         "name": "chance dinkins",
