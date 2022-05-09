@@ -44,10 +44,7 @@ export class FileSizeMinimumNotMetError extends FileDropError {
     readableMinimum: string;
     readableSize: string;
     constructor(file: FileWithPath, minimum: number, message?: string) {
-
-        message =
-            message ??
-            `$file size ${file.size} does not meet the file size minimum of ${minimum}.`;
+        message = message ?? `$file size ${file.size} does not meet the file size minimum of ${minimum}.`;
         super(ErrorCode.FileSizeMinimumNotMet, file, message);
 
         this.minimum = minimum;
@@ -59,7 +56,7 @@ export class FileSizeLimitExceededError extends FileDropError {
     readableSize: string;
     constructor(file: File, limit: number, message?: string) {
         message = message ?? `file size ${file.size} exceeds file size limit of ${limit}.`;
-        super(ErrorCode.FileSizeMinimumNotMet, file, message);
+        super(ErrorCode.FileSizeMaximumExceeded, file, message);
     }
 }
 export class FileCountExceededError extends FileDropError {
