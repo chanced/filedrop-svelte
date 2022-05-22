@@ -109,6 +109,7 @@ function getInputElement(node: HTMLElement, { input }: FileDropOptions): HTMLInp
     return inputs.item(0) as HTMLInputElement;
 }
 
+let elementDragCounter = 0;
 export const filedrop = function (node: HTMLElement, opts?: FileDropOptions): Action {
     function dispatch<K extends keyof Events, T extends Events[K] = Events[K]>(typ: K, detail: T): void {
         node.dispatchEvent(new CustomEvent<T>(typ, { detail }));
@@ -226,7 +227,7 @@ export const filedrop = function (node: HTMLElement, opts?: FileDropOptions): Ac
 
     async function handleDragEnter(ev: DragEvent) {
         isDraggingFiles = isEventWithFiles(ev);
-        if (!isDraggingFiles) {
+        if (!isDraggingFiles || 0 < elementDragCounter++) {
             return;
         }
         isDraggingFiles = true;
@@ -243,7 +244,7 @@ export const filedrop = function (node: HTMLElement, opts?: FileDropOptions): Ac
 
     async function handleDragLeave(ev: DragEvent) {
         isDraggingFiles = isEventWithFiles(ev);
-        if (!isDraggingFiles) {
+        if (!isDraggingFiles || 0 < --elementDragCounter) {
             return;
         }
         const files = await extractFilesFromEvent(ev);
@@ -278,6 +279,7 @@ export const filedrop = function (node: HTMLElement, opts?: FileDropOptions): Ac
         if (!isDraggingFiles) {
             return;
         }
+        elementDragCounter = 0;
         if (isNode(ev.target) && (node.isEqualNode(ev.target) || node.contains(ev.target))) {
             // let it bubble
             return;
