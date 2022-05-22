@@ -227,7 +227,7 @@ export const filedrop = function (node: HTMLElement, opts?: FileDropOptions): Ac
 
     async function handleDragEnter(ev: DragEvent) {
         isDraggingFiles = isEventWithFiles(ev);
-        if (!isDraggingFiles && 0 < elementDragCounter++) {
+        if (!isDraggingFiles || 0 < elementDragCounter++) {
             return;
         }
         isDraggingFiles = true;
@@ -244,7 +244,7 @@ export const filedrop = function (node: HTMLElement, opts?: FileDropOptions): Ac
 
     async function handleDragLeave(ev: DragEvent) {
         isDraggingFiles = isEventWithFiles(ev);
-        if (!isDraggingFiles && 0 < --elementDragCounter) {
+        if (!isDraggingFiles || 0 < --elementDragCounter) {
             return;
         }
         const files = await extractFilesFromEvent(ev);
