@@ -9,7 +9,7 @@ npm i filedrop-svelte -D
 
 # yarn add filedrop-svelte -dev
 ```
-
+If using Typescript, see the [Typescript section](#typescript).
 ## Usage
 
 filedrop-svelte comes with both a component and an action. The component is basically a wrapper around the action with some some default styling.
