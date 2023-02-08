@@ -62,6 +62,7 @@ See this [REPL for minimal usage](https://svelte.dev/repl/645841f327b8484093f94b
 	<!-- you can add your input[type="file"] here if you want.
 	or you can omit it and it'll be appended -->
 	Drag &amp; drop files
+	{files}
 </div>
 ```
 
