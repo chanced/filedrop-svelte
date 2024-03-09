@@ -92,7 +92,7 @@ function isEventTargetHTMLElementInput(ev: InputEvent | Event): ev is Event & { 
 
 export function isEventWithFiles(ev: Event): boolean {
     if (isEventTargetHTMLElementInput(ev)) {
-        return !!ev.target.files.length;
+        return !!ev.target.files && !!ev.target.files.length;
     }
     return (
         isDragEvent(ev) && ev.dataTransfer.types.some((t) => t === "Files" || t === "application/x-moz-file")
